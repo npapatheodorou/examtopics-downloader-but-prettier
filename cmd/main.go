@@ -12,8 +12,9 @@ import (
 
 func main() {
 	provider := flag.String("p", "google", "Name of the exam provider (default -> google)")
-	grepStr := flag.String("s", "", "String to grep for in discussion links (required)")
+	grepStr := flag.String("s", "", "String to grep for in discussion links")
 	outputPath := flag.String("o", "examtopics_output.md", "Optional path of the file where the data will be outputted")
+	fileType := flag.String("type", "md", "Optionally include file type (default -> .md)")
 	commentBool := flag.Bool("c", false, "Optionally include all the comment/discussion text")
 	examsFlag := flag.Bool("exams", false, "Optionally show all the possible exams for your selected provider and exit")
 	saveUrls := flag.Bool("save-links", false, "Optional argument to save unique links to questions")
@@ -31,14 +32,14 @@ func main() {
 	}
 
 	if *grepStr == "" {
-		log.Println("running without a valid string to search for with -s, (no_grep_str)!")
+		log.Printf("running without a valid string to search for with -s, (no_grep_str)!")
 	}
 
 	if !*noCache {
 		links := fetch.GetCachedPages(*provider, *grepStr, *token)
 		if len(links) > 0 {
-			utils.WriteData(links, *outputPath, *commentBool)
-			fmt.Printf("Successfully saved cached output to %s.\n", *outputPath)
+			utils.WriteData(links, *outputPath, *commentBool, *fileType)
+			fmt.Printf("Successfully saved cached output to %s (filetype: %s).\n", *outputPath, *fileType)
 			os.Exit(0)
 		}
 	}
@@ -49,6 +50,6 @@ func main() {
 	if *saveUrls {
 		utils.SaveLinks("saved-links.txt", links)
 	}
-	utils.WriteData(links, *outputPath, *commentBool)
-	fmt.Printf("Successfully saved output to %s.\n", *outputPath)
+	utils.WriteData(links, *outputPath, *commentBool, *fileType)
+	fmt.Printf("Successfully saved output to %s (filetype: %s).\n", *outputPath, *fileType)
 }

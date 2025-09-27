@@ -1,9 +1,17 @@
 package utils
 
 import (
+	"bufio"
+	"bytes"
+	"regexp"
 	"examtopics-downloader/internal/models"
 	"fmt"
 	"log"
+	"os"
+	"strings"
+
+	"github.com/mandolyte/mdtopdf"
+	"github.com/yuin/goldmark"
 )
 
 func writeFile(filename string, content any) {
@@ -19,10 +27,11 @@ func writeFile(filename string, content any) {
 		}
 	default:
 		log.Printf("writeFile: unsupported content type %T", v)
+		return
 	}
 }
 
-func WriteData(dataList []models.QuestionData, outputPath string, commentBool bool) {
+func WriteData(dataList []models.QuestionData, outputPath string, commentBool bool, fileType string) {
 	file := CreateFile(outputPath)
 	defer file.Close()
 
@@ -55,6 +64,103 @@ func WriteData(dataList []models.QuestionData, outputPath string, commentBool bo
 
 		fmt.Fprintf(file, "----------------------------------------\n\n")
 	}
+
+	switch fileType {
+	case "pdf":
+		mdContent, err := os.ReadFile(outputPath)
+		if err != nil {
+			log.Printf("failed to read markdown file: %v", err)
+			return
+		}
+
+		opts := []mdtopdf.RenderOption{
+			mdtopdf.IsHorizontalRuleNewPage(true), // treat --- as new page
+		}
+
+		pdfName := strings.TrimSuffix(outputPath, ".md") + ".pdf"
+		renderer := mdtopdf.NewPdfRenderer("portrait", "A4", pdfName, "", opts, mdtopdf.LIGHT)
+		if err := renderer.Process(mdContent); err != nil {
+			log.Printf("mdtopdf conversion failed: %v", err)
+			return
+		}
+		deleteMarkdownFile(outputPath)
+	case "html":
+		mdBytes, err := os.ReadFile(outputPath)
+		if err != nil {
+			log.Printf("failed to read file for html conversion: %v", err)
+			return
+		}
+
+		html, err := mdToHTML(mdBytes)
+		if err != nil {
+			log.Printf("mdtohtml conversion failed: %v", err)
+			return
+		}
+
+		fileName := strings.TrimSuffix(outputPath, ".md") + ".html"
+		err = os.WriteFile(fileName, html, 0644)
+		if err != nil {
+			log.Printf("failed to write html file: %v", err)
+			return
+		}
+		deleteMarkdownFile(outputPath)
+	case "text":
+		mdBytes, err := os.ReadFile(outputPath)
+		if err != nil {
+			log.Printf("failed to read file for text conversion: %v", err)
+			return
+		}
+
+		txt := mdToText(string(mdBytes))
+
+		fileName := strings.TrimSuffix(outputPath, ".md") + ".txt"
+		err = os.WriteFile(fileName, []byte(txt), 0644)
+		if err != nil {
+			log.Printf("failed to write text file: %v", err)
+			return
+		}
+		deleteMarkdownFile(outputPath)
+	}
+}
+
+func mdToHTML(md []byte) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := goldmark.Convert(md, &buf); err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
+}
+
+func deleteMarkdownFile(filePath string) {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Delete Markdown file after conversion? (y/n): ")
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(strings.ToLower(input))
+
+	if input == "y" || input == "yes" {
+		fmt.Println("Deleting file...")
+		os.Remove(filePath)
+	} else {
+		fmt.Println("Keeping file.")
+	}
+}
+
+func mdToText(md string) string {
+	text := md
+	// Markdown headers (#, ##, ###)
+	header := regexp.MustCompile(`(?m)^#{1,6}\s*`)
+	text = header.ReplaceAllString(text, "")
+	// bold/italic symbols (*, **, _)
+	formatting := regexp.MustCompile(`(\*\*|\*|__|_)`)
+	text = formatting.ReplaceAllString(text, "")
+	// links but keep link text [text](url) → text
+	link := regexp.MustCompile(`\[(.*?)\]\(.*?\)`)
+	text = link.ReplaceAllString(text, "$1")
+	// images ![alt](url)
+	image := regexp.MustCompile(`!\[.*?\]\(.*?\)`)
+	text = image.ReplaceAllString(text, "")
+
+	return text
 }
 
 func SaveLinks(filename string, links []models.QuestionData) {

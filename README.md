@@ -76,6 +76,8 @@ Each command line argument you can provide when running the program:
     	Optional argument to save unique links to questions
   -t string
     	Optional argument to make cached requests faster to gh api
+  -type string
+    	Optionally include file type (default -> .md) (default "md")
 ```
 
 ## Possible Arguments List
@@ -167,6 +169,17 @@ The cached data helps you access big dumps faster.
 When you add this argument, it tells the program to ignore the cached `Github` repoitories of updated exam info, however the scraper will take longer than the cache.
 Useful when wanting to scrape realtime data.
 
+### File Type, `-type`
+
+When you use the `-type` argument, it tells the program to convert the default filetype of `.md` files to the option of your choice.  
+Currently we have these types supported:  
+- `html` -> generates `examtopics_output.html`
+- `pdf` -> generates `examtopics_output.pdf`
+- `txt` -> generates `examtopics_output.txt`
+
+> [!NOTE]  
+> Files are kept in same/similar format as you would see in the `.md` file, for formatting changes, use other arguments.
+
 ## [For outputted file examples, see the examples folder](examples/google_devops.md)
 
 ## Demo
@@ -224,5 +237,3 @@ D. 172.23.104.4
 
 ----------------------------------------
 ```
-
-More options for formatting are coming soon.
