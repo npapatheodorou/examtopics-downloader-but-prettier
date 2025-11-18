@@ -18,7 +18,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-var client = &http.Client{Timeout: constants.HttpTimeout}
+var client = utils.NewHTTPClient()
 
 func FetchURL(url string, client http.Client) []byte {
 	backoff := constants.InitalBackoff

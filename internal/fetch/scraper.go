@@ -146,7 +146,8 @@ func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concu
 		close(results)
 	}()
 
-	var all []string
+	// about 10 questions per examtopics page, we can preallocate
+	all := make([]string, 0, numPages*10)
 	for res := range results {
 		all = append(all, res...)
 	}

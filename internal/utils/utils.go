@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"examtopics-downloader/internal/constants"
 	"examtopics-downloader/internal/models"
 	"fmt"
 	"math/rand"
@@ -199,12 +200,24 @@ func CapitalizeFirstLetter(s string) string {
 	return strings.ToUpper(string(s[0])) + s[1:]
 }
 
+// NewGitHubClient creates an authenticated HTTP client with optimized transport
 func NewGitHubClient(token string) *http.Client {
+	transport := models.OptimizedTransport()
+	
 	return &http.Client{
+		Timeout: constants.HttpTimeout,
 		Transport: &models.AuthTransport{
 			Token:     token,
-			Transport: http.DefaultTransport,
+			Transport: transport,
 		},
+	}
+}
+
+// NewHTTPClient creates an optimized HTTP client
+func NewHTTPClient() *http.Client {
+	return &http.Client{
+		Timeout:   constants.HttpTimeout,
+		Transport: models.OptimizedTransport(),
 	}
 }
 
