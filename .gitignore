@@ -4,3 +4,4 @@ examtopics_output.pdf
 *.txt
 env/
 !examples/*
+.DS_STORE
