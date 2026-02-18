@@ -15,7 +15,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What are the differences between hard disk drives and solid state disks? (Choose two.) 
-Suggested Answer: AE 🗳️ 
+Suggested Answer: AE  
 
 A. Hard disks have a motor and moving parts, solid state disks do not.
 
@@ -48,7 +48,7 @@ Topic #: 1
 [All 010-150 Questions]
 
 Which of the following Linux distributions use the dpkg package management system? (Choose TWO correct answers.) 
-Suggested Answer: CD 🗳️ 
+Suggested Answer: CD  
 
 A. Suse
 
@@ -81,7 +81,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Reverse DNS assigns hostnames to IP addresses. How is the name of the IP address 198.51.100.165 stored on a DNS server? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. In the A record for 165.100.51.198.ipv4.arpa.
 
@@ -114,7 +114,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following types of bus can connect hard disk drives with the motherboard? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. The RAM bus
 
@@ -147,7 +147,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Members of a team already have experience using Red Hat Enterprise Linux. For a small hobby project, the team wants to set up a Linux server without paying for a subscription. Which of the following Linux distributions allows the team members to apply as much of their Red Hat Enterprise Linux knowledge as possible? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. Ubuntu Linux LTS
 
@@ -180,7 +180,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What information can be displayed by top? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. Existing files, ordered by their size.
 
@@ -213,7 +213,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands can be used to resolve a DNS name to an IP address? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. dnsname
 
@@ -269,7 +269,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is true about the dmesg command? (Choose two.) 
-Suggested Answer: CE 🗳️ 
+Suggested Answer: CE  
 
 A. It traces the execution of a command and shows each step the program carries out.
 
@@ -302,7 +302,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following outputs could stem from the command last? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. 1 ls 2 cat text.txt 3 logout
 
@@ -335,7 +335,7 @@ Topic #: 1
 [All 010-150 Questions]
 
 Which of the following software packages is an e-mail server? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. Postfix
 
@@ -368,7 +368,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is the UID of the user root? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. 1
 
@@ -401,7 +401,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which permissions are set on a regular file once the permissions have been modified with the command chmod 654 file.txt? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. drw-r-xr--
 
@@ -434,7 +434,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is true about the owner of a file? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. Each file is owned by exactly one user and one group.
 
@@ -467,7 +467,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following permissions are set on the /tmp/ directory? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. rwxrwxrwt
 
@@ -500,7 +500,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which command adds the new user tux and creates the user's home directory with default configuration files? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. defaultuser tux
 
@@ -533,7 +533,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What information is stored in /etc/passwd? (Choose three.) 
-Suggested Answer: BCE 🗳️ 
+Suggested Answer: BCE  
 
 A. The user's storage space limit
 
@@ -566,7 +566,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following tar options handle compression? (Choose two.) 
-Suggested Answer: BD 🗳️ 
+Suggested Answer: BD  
 
 A. -bz
 
@@ -622,7 +622,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands creates an archive file work.tar from the contents of the directory ./work/? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. tar --new work.tar ./work/
 
@@ -655,7 +655,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following keys can be pressed to exit less? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. l
 
@@ -688,7 +688,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 The current directory contains the following file:-rwxr-xr-x 1 root root 859688 Feb 7 08:15 test.shGiven that the file is a valid shell script, how can this script be executed? (Choose two.) 
-Suggested Answer: DE 🗳️ 
+Suggested Answer: DE  
 
 A. run test.sh
 
@@ -721,7 +721,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands sorts the output of the command export-logs? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. export-logs < sort
 
@@ -754,7 +754,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 A directory contains the following files:What would be the output of the following shell script?for file in .txt 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. .txt
 
@@ -787,7 +787,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands will search for the file foo.txt under the directory /home? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. search /home -file foo.txt
 
@@ -820,7 +820,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 The current directory contains the following file:-rw-r`"r`" 1 root exec 24551 Apr 2 12:36 test.shThe file contains a valid shell script, but executing this file using ./test.sh leads to this error: bash: ./test.sh: Permission deniedWhat should be done in order to successfully execute the script? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. The file's extension should be changed from .sh to .bin.
 
@@ -853,7 +853,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is a Linux distribution? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. The Linux file system as seen from the root account after mounting all file systems.
 
@@ -886,7 +886,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which package management tool is used in Red Hat-based Linux Systems? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. portage
 
@@ -919,7 +919,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following programs is a graphical editor for vector graphics? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. Python
 
@@ -952,7 +952,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Where is the operating system of a Raspberry Pi stored? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. On the master device attached to the Raspberry Pi's IDE bus.
 
@@ -985,7 +985,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is defined by a Free Software license? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. Details of the technical documentation each contributor has to provide.
 
@@ -1018,7 +1018,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Why are web browser cookies considered dangerous? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. Cookies support identification and tracking of users.
 
@@ -1051,7 +1051,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following are typical services offered by public cloud providers? (Choose three.) 
-Suggested Answer: ABE 🗳️ 
+Suggested Answer: ABE  
 
 A. Platform as a Service(PaaS)
 
@@ -1084,7 +1084,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following characters in a shell prompt indicates the shell is running with root privileges? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. !
 
@@ -1117,7 +1117,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands are used to get information on the proper use of ls? (Choose two.) 
-Suggested Answer: DE 🗳️ 
+Suggested Answer: DE  
 
 A. option ls
 
@@ -1150,7 +1150,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is true about a recursive directory listing? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. It includes the content of sub-directories.
 
@@ -1183,7 +1183,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Running the command rm Downloads leads to the following error: rm: cannot remove 'Downloads/': Is a directoryWhich of the following commands can be used instead to remove Downloads, assuming Downloads is empty? (Choose two.) 
-Suggested Answer: BE 🗳️ 
+Suggested Answer: BE  
 
 A. undir Downloads
 
@@ -1216,7 +1216,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following directories contains information, documentation and example configuration files for installed software packages? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. /usr/share/doc/
 
@@ -1249,7 +1249,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands adds the directory /new/dir/ to the PATH environment variable? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. $PATH=/new/dir: $PATH
 
@@ -1282,7 +1282,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 A user is currently in the directory /home/user/Downloads/ and runs the command ls ../Documents/Assuming it exists, which directory's content is displayed? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. /home/user/Documents/
 
@@ -1315,7 +1315,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 A directory contains the following three files:texts 1.txttexts 2.txttexts 3.csvWhich command copies the two files ending in .txt to the /tmp/ directory? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. cp ??.txt /tmp/
 
@@ -1371,7 +1371,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following DNS record types hold an IP address? (Choose two.) 
-Suggested Answer: BD 🗳️ 
+Suggested Answer: BD  
 
 A. NS
 
@@ -1404,7 +1404,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following values could be a process ID on Linux? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. /bin/bash
 
@@ -1437,7 +1437,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following is a protocol used for automatic IP address configuration? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. NFS
 
@@ -1470,7 +1470,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following devices represents a hard disk partition? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. /dev/ttyS0
 
@@ -1503,7 +1503,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following statements regarding Linux hardware drivers is correct? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. Drivers are regular Linux programs which have to be run by the user who wants to use a device.
 
@@ -1536,7 +1536,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What can be found in the /proc/ directory? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. One directory per installed program.
 
@@ -1569,7 +1569,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 A new server needs to be installed to host services for a period of several years. Throughout this time, the server should receive important security updates from its Linux distribution.Which of the following Linux distributions meet these requirements? (Choose two.) 
-Suggested Answer: AE 🗳️ 
+Suggested Answer: AE  
 
 A. Ubuntu Linux LTS
 
@@ -1602,7 +1602,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following directories must be mounted with read and write access if it resides on its own dedicated file system? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. /opt
 
@@ -1635,7 +1635,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 The ownership of the file doku.odt should be changed. The new owner is named tux. Which command accomplishes this change? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. chmod u=tux doku.odt
 
@@ -1668,7 +1668,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What happens to a file residing outside the home directory when the file owner's account is deleted? (Choose two.) 
-Suggested Answer: CE 🗳️ 
+Suggested Answer: CE  
 
 A. During a file system check, the file is moved to /lost +found.
 
@@ -1701,7 +1701,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which statements about the directory /etc/skel are correct? (Choose two.) 
-Suggested Answer: CD 🗳️ 
+Suggested Answer: CD  
 
 A. The personal user settings of root are stored in this directory.
 
@@ -1734,7 +1734,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is true about links in a Linux file system? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. A symbolic link can only point to a file and not to a directory.
 
@@ -1767,7 +1767,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which files are the source of the information in the following output? (Choose two.) uid=1000 (bob) gid=1000 (bob) groups=1000 (bob), 10 (wheel), 150 (wireshark), 989 (docker), 1001 (libvirt) 
-Suggested Answer: BC 🗳️ 
+Suggested Answer: BC  
 
 A. /etc/id
 
@@ -1800,7 +1800,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following tasks can the command passwd accomplish? (Choose two.) 
-Suggested Answer: BE 🗳️ 
+Suggested Answer: BE  
 
 A. Change a user's username.
 
@@ -1833,7 +1833,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is true about the su command? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. It is the default shell of the root account.
 
@@ -1889,7 +1889,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Most commands on Linux can display information on their usage. How can this information typically be displayed? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. By running the command with the option /? or /??.
 
@@ -1922,7 +1922,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands shows the absolute path to the current working directory? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. who
 
@@ -1955,7 +1955,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands output the content of the file Texts 2.txt? (Choose two.) 
-Suggested Answer: AE 🗳️ 
+Suggested Answer: AE  
 
 A. cat 'Texts 2.txt'
 
@@ -1988,7 +1988,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which command displays file names only and no additional information? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. ls -a
 
@@ -2021,7 +2021,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is the purpose of the PATH environment variable? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. It allows the execution of commands without the need to know the location of the executable.
 
@@ -2054,7 +2054,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands sets the variable USERNAME to the value bob? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. set USERNAME bob
 
@@ -2110,7 +2110,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which command copies the contents of the directory /etc/, including all sub-directories, to /root/? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. copy /etc /root
 
@@ -2143,7 +2143,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands puts the lines of the file data.csv into alphabetical order? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. a..z data.csv
 
@@ -2176,7 +2176,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following examples shows the general structure of a for loop in a shell script? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. for .txt as file => echo $file
 
@@ -2209,7 +2209,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which operator in a regular expression matches the preceding character either zero or one time? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. ?
 
@@ -2242,7 +2242,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 The file script.sh in the current directory contains the following content:#!/bin/bashecho $MYVARThe following commands are used to execute this script:MYVAR=value -./script.shThe result is an empty line instead of the content of the variable MYVAR. How should MYVAR be set in order to make script.sh display the content of MYVAR? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. !MYVAR=value
 
@@ -2275,7 +2275,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is the return value of a shell script after successful execution? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. 1
 
@@ -2308,7 +2308,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands creates the ZIP archive poems.zip containing all files in the current directory whose names end in .txt? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. zip .txt > poems.zip
 
@@ -2341,7 +2341,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following statements are true regarding a typical shell script? (Choose two.) 
-Suggested Answer: AB 🗳️ 
+Suggested Answer: AB  
 
 A. It has the executable permission bit set.
 
@@ -2374,7 +2374,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands extracts the contents of the compressed archive file1.tar.gz? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. tar -czf file1.tar.gz
 
@@ -2407,7 +2407,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following commands finds all lines in the file operating-systems.txt which contain the term linux, regardless of the case? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. igrep linux operating-systems.txt
 
@@ -2440,7 +2440,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which one of the following statements concerning Linux passwords is true? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. All passwords can be decrypted using the system administrator's master password.
 
@@ -2473,7 +2473,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following programs are web servers? (Choose two.) 
-Suggested Answer: AE 🗳️ 
+Suggested Answer: AE  
 
 A. Apache HTTPD
 
@@ -2506,7 +2506,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following Linux Distributions is derived from Red Hat Enterprise Linux? 
-Suggested Answer: E 🗳️ 
+Suggested Answer: E  
 
 A. Raspbian
 
@@ -2539,7 +2539,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 Which of the following statements is true about Free Software? 
-Suggested Answer: B 🗳️ 
+Suggested Answer: B  
 
 A. It is developed by volunteers only.
 
@@ -2572,7 +2572,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 How is a new Linux computing instance provisioned in an laaS cloud? 
-Suggested Answer: D 🗳️ 
+Suggested Answer: D  
 
 A. The standard Linux installer has to be run through a remote console.
 
@@ -2605,7 +2605,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What are the differences between a private web browser window and a regular web browser window? (Choose three.) 
-Suggested Answer: BDE 🗳️ 
+Suggested Answer: BDE  
 
 A. Private web browser windows do not allow printing or storing websites.
 
@@ -2638,7 +2638,7 @@ Topic #: 1
 [All 010-160 Questions]
 
 What is the preferred source for the installation of new applications in a Linux based operating system? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. The vendor's version management system
 
@@ -2671,7 +2671,7 @@ Topic #: 1
 [All 102-500 Questions]
 
 Which of the commands below might have produced the following output? 
-Suggested Answer: C 🗳️ 
+Suggested Answer: C  
 
 A. dig -t mx www.example.org
 
@@ -2727,7 +2727,7 @@ Topic #: 2
 [All 010-150 Questions]
 
 Which of the following are correct commands for changing the current directory to the user's home? (Choose TWO answers) 
-Suggested Answer: BD 🗳️ 
+Suggested Answer: BD  
 
 A. cd /home
 
@@ -2760,7 +2760,7 @@ Topic #: 2
 [All 010-150 Questions]
 
 Which command line can be used to search help files that mention the word "copy"? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. man -k copy
 
@@ -2793,7 +2793,7 @@ Topic #: 3
 [All 010-150 Questions]
 
 Which of the following commands can be used to view a file and do search operations within it while viewing the contents? 
-Suggested Answer: A 🗳️ 
+Suggested Answer: A  
 
 A. less
 

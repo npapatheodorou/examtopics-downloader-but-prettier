@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cisco 200-301 Exam Simulator</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== APP SHELL LAYOUT ===== */
+    html, body { height: 100%; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #0f0f1a;
+      color: #e0e0e0;
+      overflow: hidden; /* prevent full page scroll */
+      padding: 0;
+    }
+
+    /* CENTERED + FIXED HEIGHT APP */
+    .app {
+      height: 100vh;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header always visible */
+    .app-header {
+      flex: 0 0 auto;
+      z-index: 1000;
+      padding: 16px 16px 0;
+    }
+
+    /* Footer always visible */
+    .app-footer {
+      flex: 0 0 auto;
+      z-index: 1000;
+      padding: 0 16px 12px;
+    }
+
+    /* Only content scrolls */
+    .app-content {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 12px 16px 18px; /* extra bottom space so last card never touches footer */
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ===== MODERN DARK SCROLLBAR ===== */
+
+    /* Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.22) rgba(255,255,255,0.06);
+    }
+
+    /* Chrome / Edge / Safari */
+    .app-content::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .app-content::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+    }
+
+    .app-content::-webkit-scrollbar-thumb {
+      background: linear-gradient(
+        180deg,
+        rgba(8,145,178,0.65),
+        rgba(14,116,144,0.45)
+      );
+      border-radius: 999px;
+      border: 2px solid rgba(15,15,26,0.9);
+    }
+
+    .app-content::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(
+        180deg,
+        rgba(8,145,178,0.9),
+        rgba(14,116,144,0.75)
+      );
+    }
+
+    /* ===== HEADER CARD ===== */
+    .page-header {
+      background: linear-gradient(135deg, #0891b2, #0e7490);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .page-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .page-header::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: -14px;
+      height: 20px;
+      border-radius: 0 0 12px 12px;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(14,116,144,0.45), rgba(15,15,26,0));
+      filter: blur(8px);
+    }
+
+    .page-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .page-header h1 {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .company-name { color: rgba(255,255,255,0.6); font-weight: 600; }
+    .header-separator { color: rgba(255,255,255,0.3); font-weight: 400; }
+
+    .page-header .badge {
+      background: rgba(255,255,255,0.2);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .score-display {
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .btn-restart {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-family: "Inter", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-restart:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-1px);
+    }
+
+    .btn-restart:active { transform: scale(0.97); }
+
+    /* SEARCH */
+    .search-wrapper { width: 100%; position: relative; }
+    .search-wrapper .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 9px 36px 9px 34px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.25s;
+    }
+
+    .search-input::placeholder { color: rgba(255,255,255,0.5); }
+
+    .search-input:focus {
+      border-color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-family: "Inter", sans-serif;
+    }
+
+    .search-clear.show { display: flex; }
+    .search-clear:hover { background: rgba(255,255,255,0.35); }
+
+    .search-stats {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 6px;
+      display: none;
+      padding-left: 2px;
+    }
+
+    .search-stats.show { display: block; }
+
+    /* NO RESULTS */
+    .no-results { text-align: center; padding: 40px 20px; display: none; }
+    .no-results.show { display: block; }
+    .no-results-icon { font-size: 36px; margin-bottom: 10px; }
+    .no-results-text { color: #666; font-weight: 600; font-size: 14px; }
+    .no-results-hint { color: #444; font-size: 12px; margin-top: 4px; }
+
+    /* QUESTIONS LIST */
+    .questions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .q-card {
+      background: #1a1a2e;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.05);
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+
+    .q-card.hidden-by-search { display: none; }
+    .q-card.highlight-match { border-color: rgba(8,145,178,0.3); }
+    .q-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+
+    .q-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .q-number {
+      background: linear-gradient(135deg, #0891b2, #0e7490);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .q-preview {
+      font-size: 12px;
+      color: #a0a0c0;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .q-preview mark, .q-text mark, .opt-text mark {
+      background: rgba(250,204,21,0.3);
+      color: #fde047;
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    .q-status { font-size: 14px; flex-shrink: 0; }
+    .q-toggle { font-size: 10px; color: #666; transition: transform 0.3s; flex-shrink: 0; }
+    .q-card.open .q-toggle { transform: rotate(180deg); }
+
+    .q-body { display: none; padding: 14px 16px; }
+    .q-card.open .q-body { display: block; }
+
+    .q-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #c8c8e0;
+      margin-bottom: 14px;
+    }
+
+    .q-text strong { color: #e0e0ff; }
+
+    /* EXHIBIT IMAGE */
+    .q-exhibit {
+      margin: 10px 0 14px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #12121e;
+      position: relative;
+    }
+
+    .q-exhibit img { display: block; max-width: 100%; height: auto; cursor: zoom-in; }
+
+    .q-exhibit-label {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      color: #ccc;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .q-exhibit-zoom {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.7);
+      color: #ccc;
+      font-size: 16px;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .q-exhibit-zoom:hover { background: rgba(255,255,255,0.15); }
+
+    /* OPTIONS */
+    .opts { display: flex; flex-direction: column; gap: 6px; }
+
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.015);
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 13px;
+    }
+
+    .opt:hover:not(.disabled) {
+      border-color: rgba(8,145,178,0.35);
+      background: rgba(8,145,178,0.05);
+    }
+
+    .opt.disabled { cursor: default; }
+
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      background: rgba(255,255,255,0.06);
+      color: #888;
+      flex-shrink: 0;
+      transition: all 0.25s;
+    }
+
+    .opt-text { color: #b0b0cc; line-height: 1.4; transition: color 0.25s; }
+
+    .opt.selected {
+      border-color: rgba(8,145,178,0.5);
+      background: rgba(8,145,178,0.08);
+    }
+
+    .opt.selected .opt-letter {
+      background: linear-gradient(135deg, #0891b2, #0e7490);
+      color: #fff;
+    }
+
+    .opt.selected .opt-text { color: #d0e8f0; }
+
+    .opt.correct {
+      border-color: rgba(74,222,128,0.5) !important;
+      background: rgba(74,222,128,0.07) !important;
+    }
+
+    .opt.correct .opt-letter {
+      background: linear-gradient(135deg,#22c55e,#16a34a) !important;
+      color: #fff !important;
+    }
+
+    .opt.correct .opt-text { color: #86efac !important; font-weight: 600; }
+
+    .opt.wrong {
+      border-color: rgba(248,113,113,0.5) !important;
+      background: rgba(248,113,113,0.07) !important;
+      animation: shake 0.4s ease-out;
+    }
+
+    .opt.wrong .opt-letter {
+      background: linear-gradient(135deg,#ef4444,#dc2626) !important;
+      color: #fff !important;
+    }
+
+    .opt.wrong .opt-text { color: #fca5a5 !important; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-3px); }
+    }
+
+    .result-bar {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .result-bar.show { display: flex; }
+    .result-bar.is-correct { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: #86efac; }
+    .result-bar.is-wrong { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25); color: #fca5a5; }
+    .result-bar.is-cheat { background: rgba(250,204,21,0.1); border: 1px solid rgba(250,204,21,0.25); color: #fde047; }
+
+    .q-actions { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 13px;
+      border-radius: 8px;
+      border: none;
+      font-family: "Inter", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-submit { background: linear-gradient(135deg,#0891b2,#0e7490); color: #fff; }
+    .btn-submit:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    .btn-cheat { background: rgba(250,204,21,0.1); color: #fde047; border: 1px solid rgba(250,204,21,0.2); }
+    .btn-discuss { background: rgba(74,222,128,0.1); color: #86efac; border: 1px solid rgba(74,222,128,0.2); }
+    .btn-comments { background: rgba(168,85,247,0.1); color: #c4b5fd; border: 1px solid rgba(168,85,247,0.2); }
+    .btn-reset { background: rgba(255,255,255,0.05); color: #888; border: 1px solid rgba(255,255,255,0.08); }
+
+    .hidden { display: none !important; }
+
+    /* FOOTER STYLE (ALWAYS VISIBLE) */
+    .page-footer {
+      text-align: center;
+      padding: 12px 0 0;
+      font-size: 11px;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .page-footer a {
+      color: #667;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: #aaa; }
+
+    .page-footer svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* IMAGE ZOOM MODAL */
+    .img-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+
+    .img-modal-overlay.show { display: flex; }
+    .img-modal-overlay img {
+      max-width: 95%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* COMMENTS MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal {
+      background: #1e1e32;
+      border-radius: 16px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .modal-header h3 {
+      font-size: 14px;
+      color: #e0e0ff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-close {
+      background: rgba(255,255,255,0.06);
+      border: none;
+      color: #888;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-family: "Inter", sans-serif;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .modal-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-body::-webkit-scrollbar { width: 5px; }
+    .modal-body::-webkit-scrollbar-track { background: transparent; }
+    .modal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+    .comment-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .comment-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+
+    .comment-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: linear-gradient(135deg,#0891b2,#0e7490);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .comment-user { font-size: 12px; font-weight: 700; color: #c4b5fd; }
+
+    .comment-answer {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+      background: rgba(74,222,128,0.12);
+      color: #86efac;
+    }
+
+    .comment-body { font-size: 12px; color: #a0a0c0; line-height: 1.6; }
+    .no-comments { text-align: center; padding: 24px; color: #555; font-size: 13px; }
+
+    /* MOBILE */
+    @media (max-width: 500px) {
+      .app-header { padding: 8px 8px 0; }
+      .app-content { padding: 10px 8px 18px; }
+      .app-footer { padding: 0 8px 10px; }
+
+      .page-header { padding: 14px 16px; }
+      .page-header h1 { font-size: 13px; }
+
+      .company-name { display: none; }
+      .header-separator { display: none; }
+      .header-right { gap: 6px; }
+
+      .btn-restart { padding: 4px 8px; font-size: 10px; }
+      .q-body { padding: 10px 12px; }
+      .q-text { font-size: 12px; }
+      .opt { padding: 8px 10px; font-size: 12px; }
+      .modal { margin: 10px; max-height: 85vh; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- FIXED HEADER -->
+    <header class="app-header">
+      <div class="page-header">
+        <div class="page-header-top">
+          <div class="page-header-left">
+            <h1>
+              <span class="company-name">Cisco</span>
+              <span class="header-separator">|</span>
+              200-301 Exam Simulator
+            </h1>
+            <span class="badge">CCNA</span>
+          </div>
+
+          <div class="header-right">
+            <div class="score-display" id="scoreDisplay">0 ✓ · 0 answered</div>
+            <button class="btn-restart" onclick="confirmRestart()">🔄 Restart</button>
+          </div>
+        </div>
+
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            class="search-input"
+            id="searchInput"
+            placeholder="Search questions… e.g. 'DHCP', 'IPv4', 'Q2'"
+            oninput="handleSearch()"
+            autocomplete="off"
+          />
+          <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+          <div class="search-stats" id="searchStats"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ONLY THIS AREA SCROLLS -->
+    <main class="app-content">
+
+      <div class="no-results" id="noResults">
+        <div class="no-results-icon">🔎</div>
+        <div class="no-results-text">No questions found</div>
+        <div class="no-results-hint">Try different keywords or clear the search</div>
+      </div>
+
+      <div class="questions-list" id="questionsList">
+
+        <!-- QUESTION 1 -->
+        <div class="q-card open" id="q1" data-correct="C"
+          data-link="https://www.examtopics.com/discussions/cisco/view/138394-exam-200-301-topic-1-question-1313-discussion/"
+          data-comments='[{"user":"Anonymous","answer":"C","text":"C is correct"}]'>
+          <div class="q-top" onclick="toggleCard('q1')">
+            <span class="q-number">Q1</span>
+            <span class="q-preview" id="q1-preview">Which type of JSON data is shown?</span>
+            <span class="q-status" id="q1-status"></span>
+            <span class="q-toggle">▼</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text" id="q1-text">
+              Refer to the exhibit. Which type of JSON data is shown?
+            </div>
+            <div class="q-exhibit">
+              <span class="q-exhibit-label">📎 Exhibit</span>
+              <img src="https://img.examtopics.com/200-301/image348.png" alt="Exhibit"
+                onerror="this.parentElement.style.display='none'"
+                onclick="zoomImage(this.src)" />
+              <button class="q-exhibit-zoom"
+                onclick="zoomImage(this.parentElement.querySelector('img').src)">🔍</button>
+            </div>
+            <div class="opts" id="q1-opts">
+              <div class="opt" data-val="A" onclick="pick(this,'q1')">
+                <div class="opt-letter">A</div>
+                <div class="opt-text" data-original="Boolean">Boolean</div>
+              </div>
+              <div class="opt" data-val="B" onclick="pick(this,'q1')">
+                <div class="opt-letter">B</div>
+                <div class="opt-text" data-original="string">string</div>
+              </div>
+              <div class="opt" data-val="C" onclick="pick(this,'q1')">
+                <div class="opt-letter">C</div>
+                <div class="opt-text" data-original="object">object</div>
+              </div>
+              <div class="opt" data-val="D" onclick="pick(this,'q1')">
+                <div class="opt-letter">D</div>
+                <div class="opt-text" data-original="sequence">sequence</div>
+              </div>
+            </div>
+            <div class="result-bar" id="q1-result"></div>
+            <div class="q-actions">
+              <button class="btn btn-submit" id="q1-submit" onclick="submit('q1')" disabled>🚀 Submit</button>
+              <button class="btn btn-cheat" id="q1-cheat" onclick="cheat('q1')">👀 Sneak Peek</button>
+              <a class="btn btn-discuss hidden" id="q1-discuss" href="#" target="_blank">💬 ExamTopics</a>
+              <button class="btn btn-comments" id="q1-comments" onclick="openComments('q1')">🗨️ Comments</button>
+              <button class="btn btn-reset hidden" id="q1-reset" onclick="reset('q1')">🔄 Retry</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+        <div class="q-card" id="q2" data-correct="C"
+          data-link="https://www.examtopics.com/discussions/cisco/view/138395-exam-200-301-topic-1-question-1314-discussion/"
+          data-comments='[{"user":"Anonymous","answer":"C","text":"C is correct"}]'>
+          <div class="q-top" onclick="toggleCard('q2')">
+            <span class="q-number">Q2</span>
+            <span class="q-preview" id="q2-preview">Characteristic of private IPv4 addressing…</span>
+            <span class="q-status" id="q2-status"></span>
+            <span class="q-toggle">▼</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text" id="q2-text">
+              What is a characteristic of private IPv4 addressing?
+            </div>
+            <div class="opts" id="q2-opts">
+              <div class="opt" data-val="A" onclick="pick(this,'q2')">
+                <div class="opt-letter">A</div>
+                <div class="opt-text" data-original="Enables secure connectivity over the internet">Enables secure connectivity over the internet</div>
+              </div>
+              <div class="opt" data-val="B" onclick="pick(this,'q2')">
+                <div class="opt-letter">B</div>
+                <div class="opt-text" data-original="Allows communication across external internet boundaries">Allows communication across external internet boundaries</div>
+              </div>
+              <div class="opt" data-val="C" onclick="pick(this,'q2')">
+                <div class="opt-letter">C</div>
+                <div class="opt-text" data-original="Assigned by an enterprise organization to internal hosts">Assigned by an enterprise organization to internal hosts</div>
+              </div>
+              <div class="opt" data-val="D" onclick="pick(this,'q2')">
+                <div class="opt-letter">D</div>
+                <div class="opt-text" data-original="Used by ISPs when only one IP is needed to connect to the internet">Used by ISPs when only one IP is needed to connect to the internet</div>
+              </div>
+            </div>
+            <div class="result-bar" id="q2-result"></div>
+            <div class="q-actions">
+              <button class="btn btn-submit" id="q2-submit" onclick="submit('q2')" disabled>🚀 Submit</button>
+              <button class="btn btn-cheat" id="q2-cheat" onclick="cheat('q2')">👀 Sneak Peek</button>
+              <a class="btn btn-discuss hidden" id="q2-discuss" href="#" target="_blank">💬 ExamTopics</a>
+              <button class="btn btn-comments" id="q2-comments" onclick="openComments('q2')">🗨️ Comments</button>
+              <button class="btn btn-reset hidden" id="q2-reset" onclick="reset('q2')">🔄 Retry</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUESTION 3 -->
+        <div class="q-card" id="q3" data-correct="C"
+          data-link="https://www.examtopics.com/discussions/cisco/view/133435-exam-200-301-topic-1-question-1315-discussion/"
+          data-comments='[
+            {"user":"bezkin","answer":"C","text":"default-router adds the default gateway to DHCP leases sent to clients."},
+            {"user":"Anonymous","answer":"C","text":"C is correct. The next to last usable IP address is 192.168.20.253."},
+            {"user":"Rolfer","answer":"C","text":"In this case only \\"default-router\\" command is correct, so dont waste your time in the exam and go to the next question."},
+            {"user":"ladarius01","answer":"","text":"192.168.20.0/24\\nBroadcast = 192.168.20.255\\nLast usable IP = 192.168.20.254\\nNext to last usable IP = 192.168.20.253\\nCommand for default gateway = default-router"},
+            {"user":"ricky1802","answer":"C","text":"ip dhcp pool NOCC\\n  network 192.168.20.0 255.255.255.0\\n  default-router 192.168.20.253"}
+          ]'>
+          <div class="q-top" onclick="toggleCard('q3')">
+            <span class="q-number">Q3</span>
+            <span class="q-preview" id="q3-preview">DHCP pool NOCC with 192.168.20.0/24, next to last usable IP…</span>
+            <span class="q-status" id="q3-status"></span>
+            <span class="q-toggle">▼</span>
+          </div>
+          <div class="q-body">
+            <div class="q-text" id="q3-text">
+              A DHCP pool has been created with the name <strong>NOCC</strong>. The pool is using
+              <strong>192.168.20.0/24</strong> and must use the next to last usable IP address as the
+              default gateway for the DHCP clients.<br /><br />
+              <strong>What is the next step in the process?</strong>
+            </div>
+            <div class="opts" id="q3-opts">
+              <div class="opt" data-val="A" onclick="pick(this,'q3')">
+                <div class="opt-letter">A</div>
+                <div class="opt-text" data-original="next-server 192.168.20.254">next-server 192.168.20.254</div>
+              </div>
+              <div class="opt" data-val="B" onclick="pick(this,'q3')">
+                <div class="opt-letter">B</div>
+                <div class="opt-text" data-original="network 192.168.20.254 255.255.255.0 secondary">network 192.168.20.254 255.255.255.0 secondary</div>
+              </div>
+              <div class="opt" data-val="C" onclick="pick(this,'q3')">
+                <div class="opt-letter">C</div>
+                <div class="opt-text" data-original="default-router 192.168.20.253">default-router 192.168.20.253</div>
+              </div>
+              <div class="opt" data-val="D" onclick="pick(this,'q3')">
+                <div class="opt-letter">D</div>
+                <div class="opt-text" data-original="ip default-gateway 0.0.0.0 0.0.0.0 192.168.20.253">ip default-gateway 0.0.0.0 0.0.0.0 192.168.20.253</div>
+              </div>
+            </div>
+            <div class="result-bar" id="q3-result"></div>
+            <div class="q-actions">
+              <button class="btn btn-submit" id="q3-submit" onclick="submit('q3')" disabled>🚀 Submit</button>
+              <button class="btn btn-cheat" id="q3-cheat" onclick="cheat('q3')">👀 Sneak Peek</button>
+              <a class="btn btn-discuss hidden" id="q3-discuss" href="#" target="_blank">💬 ExamTopics</a>
+              <button class="btn btn-comments" id="q3-comments" onclick="openComments('q3')">🗨️ Comments</button>
+              <button class="btn btn-reset hidden" id="q3-reset" onclick="reset('q3')">🔄 Retry</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- FIXED FOOTER -->
+    <footer class="app-footer">
+      <div class="page-footer">
+        Made by
+        <a href="https://github.com/npapatheodorou" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          npapatheodorou
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- IMAGE ZOOM MODAL -->
+  <div class="img-modal-overlay" id="imgModal" onclick="closeImageModal()">
+    <img id="imgModalSrc" src="" alt="Zoomed exhibit" />
+  </div>
+
+  <!-- COMMENTS MODAL -->
+  <div class="modal-overlay" id="commentsModal" onclick="closeCommentsOutside(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🗨️ Community Discussion</h3>
+        <button class="modal-close" onclick="closeComments()">✕</button>
+      </div>
+      <div class="modal-body" id="commentsBody"></div>
+    </div>
+  </div>
+
+  <!-- RESTART CONFIRM MODAL -->
+  <div class="confirm-overlay" id="confirmOverlay" onclick="closeConfirmOutside(event)">
+    <div class="confirm-box">
+      <div class="confirm-icon">🔄</div>
+      <div class="confirm-title">Restart Exam?</div>
+      <div class="confirm-text">
+        This will reset all your answers and score.<br />
+        Are you sure you want to start over?
+      </div>
+      <div class="confirm-actions">
+        <button class="confirm-btn confirm-cancel" onclick="closeConfirm()">Cancel</button>
+        <button class="confirm-btn confirm-yes" onclick="restartExam()">Yes, Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = {};
+    let totalAnswered = 0, totalCorrect = 0;
+
+    const originals = {};
+    document.querySelectorAll(".q-card").forEach((card) => {
+      const id = card.id;
+      originals[id] = {
+        preview: document.getElementById(`${id}-preview`).innerHTML,
+        text: document.getElementById(`${id}-text`).innerHTML,
+        opts: [],
+      };
+      card.querySelectorAll(".opt-text").forEach((o) => {
+        originals[id].opts.push(o.getAttribute("data-original"));
+      });
+    });
+
+    /* ===== SEARCH ===== */
+    let searchTimeout;
+    function handleSearch() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(doSearch, 150);
+      document
+        .getElementById("searchClear")
+        .classList.toggle(
+          "show",
+          document.getElementById("searchInput").value.length > 0
+        );
+    }
+
+    function doSearch() {
+      const raw = document.getElementById("searchInput").value.trim();
+      const cards = document.querySelectorAll(".q-card");
+      const stats = document.getElementById("searchStats");
+      const noRes = document.getElementById("noResults");
+
+      cards.forEach((card) => {
+        const id = card.id;
+        document.getElementById(`${id}-preview`).innerHTML = originals[id].preview;
+        document.getElementById(`${id}-text`).innerHTML = originals[id].text;
+        card.querySelectorAll(".opt-text").forEach((o, i) => {
+          o.innerHTML = originals[id].opts[i];
+        });
+        card.classList.remove("highlight-match");
+      });
+
+      if (!raw) {
+        cards.forEach((c) => c.classList.remove("hidden-by-search"));
+        stats.classList.remove("show");
+        noRes.classList.remove("show");
+        return;
+      }
+
+      const query = raw.toLowerCase();
+      const qNumMatch = raw.match(/^q(\d+)$/i);
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const id = card.id;
+        const bodyText = document.getElementById(`${id}-text`).textContent;
+        const optsText = originals[id].opts.join(" ");
+        const qNum = id.replace("q", "");
+        const fullText = `Q${qNum} ${originals[id].preview} ${bodyText} ${optsText}`.toLowerCase();
+
+        const match = qNumMatch ? qNum === qNumMatch[1] : fullText.includes(query);
+
+        if (match) {
+          card.classList.remove("hidden-by-search");
+          card.classList.add("highlight-match");
+          visible++;
+
+          if (!qNumMatch) {
+            document.getElementById(`${id}-preview`).innerHTML = hl(originals[id].preview, raw);
+            document.getElementById(`${id}-text`).innerHTML = hlHTML(originals[id].text, raw);
+            card.querySelectorAll(".opt-text").forEach((o, i) => {
+              o.innerHTML = hl(originals[id].opts[i], raw);
+            });
+          }
+        } else {
+          card.classList.add("hidden-by-search");
+        }
+      });
+
+      stats.textContent = `${visible} of ${cards.length} questions`;
+      stats.classList.add("show");
+      noRes.classList.toggle("show", visible === 0);
+    }
+
+    function hl(text, q) {
+      if (!q) return text;
+      const e = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return text.replace(new RegExp(`(${e})`, "gi"), "<mark>$1</mark>");
+    }
+
+    function hlHTML(html, q) {
+      if (!q) return html;
+      const e = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return html.replace(/>([^<]+)</g, (m, t) => ">" + t.replace(new RegExp(`(${e})`, "gi"), "<mark>$1</mark>") + "<");
+    }
+
+    function clearSearch() {
+      const input = document.getElementById("searchInput");
+      input.value = "";
+      input.focus();
+      handleSearch();
+      doSearch();
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        document.getElementById("searchInput").focus();
+      }
+      if (e.key === "Escape") {
+        closeComments();
+        closeImageModal();
+        closeConfirm();
+        document.getElementById("searchInput").blur();
+      }
+    });
+
+    /* ===== QUIZ ===== */
+    function toggleCard(id) {
+      document.getElementById(id).classList.toggle("open");
+    }
+
+    function getCorrectAnswers(card) {
+      const raw = (card.dataset.correct || "").toUpperCase().trim();
+      if (!raw) return [];
+
+      let parts = raw.split(",").map((s) => s.trim()).filter(Boolean);
+      if (parts.length === 1 && parts[0].length > 1) {
+        parts = parts[0].split("");
+      }
+
+      const seen = new Set();
+      return parts.filter(
+        (letter) => /^[A-F]$/.test(letter) && !seen.has(letter) && seen.add(letter)
+      );
+    }
+
+    function sameAnswers(a, b) {
+      if (a.length !== b.length) return false;
+      const setB = new Set(b);
+      return a.every((item) => setB.has(item));
+    }
+
+    function pick(el, qid) {
+      if (state[qid]?.answered) return;
+
+      const card = document.getElementById(qid);
+      const correctAnswers = getCorrectAnswers(card);
+      const isMulti = correctAnswers.length > 1;
+      const picked = el.getAttribute("data-val");
+
+      if (!state[qid]) state[qid] = { selected: [], answered: false, wasCorrect: false, counted: false };
+      if (!Array.isArray(state[qid].selected)) state[qid].selected = [];
+
+      if (isMulti) {
+        if (el.classList.contains("selected")) {
+          el.classList.remove("selected");
+          state[qid].selected = state[qid].selected.filter((v) => v !== picked);
+        } else {
+          el.classList.add("selected");
+          if (!state[qid].selected.includes(picked)) state[qid].selected.push(picked);
+        }
+      } else {
+        document.querySelectorAll(`#${qid}-opts .opt`).forEach((o) => o.classList.remove("selected"));
+        el.classList.add("selected");
+        state[qid].selected = [picked];
+      }
+
+      document.getElementById(`${qid}-submit`).disabled = state[qid].selected.length === 0;
+    }
+
+    function submit(qid) {
+      const card = document.getElementById(qid);
+      const correctAnswers = getCorrectAnswers(card);
+      const selectedAnswers = Array.isArray(state[qid]?.selected) ? state[qid].selected : [];
+      if (!selectedAnswers.length || state[qid]?.answered) return;
+
+      state[qid].answered = true;
+      state[qid].counted = true;
+
+      document.querySelectorAll(`#${qid}-opts .opt`).forEach((o) => o.classList.add("disabled"));
+      const res = document.getElementById(`${qid}-result`);
+      const status = document.getElementById(`${qid}-status`);
+      const correctSet = new Set(correctAnswers);
+      const selectedSet = new Set(selectedAnswers);
+      const answersText = correctAnswers.join(", ");
+      const isCorrect = sameAnswers(selectedAnswers, correctAnswers);
+
+      document.querySelectorAll(`#${qid}-opts .opt`).forEach((opt) => {
+        const val = opt.getAttribute("data-val");
+        if (correctSet.has(val)) {
+          opt.classList.add("correct");
+        } else if (selectedSet.has(val)) {
+          opt.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        res.className = "result-bar show is-correct";
+        res.innerHTML =
+          correctAnswers.length > 1
+            ? `Correct! Answers: <strong>${answersText}</strong>`
+            : "Correct!";
+        status.textContent = "OK";
+        totalCorrect++;
+        state[qid].wasCorrect = true;
+      } else {
+        res.className = "result-bar show is-wrong";
+        res.innerHTML = `Wrong - answer${correctAnswers.length > 1 ? "s are" : " is"} <strong>${answersText}</strong>`;
+        status.textContent = "X";
+        state[qid].wasCorrect = false;
+      }
+
+      totalAnswered++;
+      showPost(qid, card.dataset.link);
+      updateScore();
+    }
+
+    function cheat(qid) {
+      if (state[qid]?.answered) return;
+      if (!state[qid]) state[qid] = { selected: [], answered: false, wasCorrect: false, counted: false };
+
+      state[qid].answered = true;
+      state[qid].counted = false;
+
+      const card = document.getElementById(qid);
+      const correctAnswers = getCorrectAnswers(card);
+      const answersText = correctAnswers.join(", ");
+
+      document.querySelectorAll(`#${qid}-opts .opt`).forEach((o) => o.classList.add("disabled"));
+
+      correctAnswers.forEach((letter) => {
+        const el = document.querySelector(`#${qid}-opts .opt[data-val="${letter}"]`);
+        if (el) el.classList.add("correct");
+      });
+
+      const res = document.getElementById(`${qid}-result`);
+      res.className = "result-bar show is-cheat";
+      res.innerHTML = `Answer${correctAnswers.length > 1 ? "s" : ""}: <strong>${answersText}</strong>`;
+
+      document.getElementById(`${qid}-status`).textContent = "peek";
+      state[qid].wasCorrect = false;
+      showPost(qid, card.dataset.link);
+    }
+
+    function showPost(qid, link) {
+      document.getElementById(`${qid}-submit`).classList.add("hidden");
+      document.getElementById(`${qid}-cheat`).classList.add("hidden");
+
+      const d = document.getElementById(`${qid}-discuss`);
+      d.classList.remove("hidden");
+      d.href = link;
+
+      document.getElementById(`${qid}-reset`).classList.remove("hidden");
+    }
+
+    function reset(qid) {
+      if (state[qid]?.answered && state[qid]?.counted) {
+        totalAnswered--;
+        if (state[qid].wasCorrect) totalCorrect--;
+        updateScore();
+      }
+
+      state[qid] = { answered: false, selected: [], wasCorrect: false, counted: false };
+
+      document.querySelectorAll(`#${qid}-opts .opt`).forEach((o) =>
+        o.classList.remove("selected", "correct", "wrong", "disabled")
+      );
+
+      document.getElementById(`${qid}-result`).className = "result-bar";
+      document.getElementById(`${qid}-result`).innerHTML = "";
+      document.getElementById(`${qid}-status`).textContent = "";
+
+      document.getElementById(`${qid}-submit`).classList.remove("hidden");
+      document.getElementById(`${qid}-submit`).disabled = true;
+
+      document.getElementById(`${qid}-cheat`).classList.remove("hidden");
+      document.getElementById(`${qid}-discuss`).classList.add("hidden");
+      document.getElementById(`${qid}-reset`).classList.add("hidden");
+    }
+
+    function updateScore() {
+      document.getElementById("scoreDisplay").textContent = `${totalCorrect} ✓ · ${totalAnswered} answered`;
+    }
+
+    /* ===== RESTART ===== */
+    function confirmRestart() {
+      if (totalAnswered === 0) {
+        restartExam();
+        return;
+      }
+      document.getElementById("confirmOverlay").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeConfirm() {
+      document.getElementById("confirmOverlay").classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    function closeConfirmOutside(e) {
+      if (e.target === document.getElementById("confirmOverlay")) closeConfirm();
+    }
+
+    function restartExam() {
+      closeConfirm();
+      document.querySelectorAll(".q-card").forEach((card) => {
+        reset(card.id);
+        card.classList.remove("open");
+      });
+
+      const first = document.querySelector(".q-card");
+      if (first) first.classList.add("open");
+
+      totalAnswered = 0;
+      totalCorrect = 0;
+      updateScore();
+      clearSearch();
+
+      document.querySelector(".app-content")?.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* ===== COMMENTS MODAL ===== */
+    function openComments(qid) {
+      const card = document.getElementById(qid);
+      let comments = [];
+      try { comments = JSON.parse(card.dataset.comments); } catch (e) {}
+
+      const body = document.getElementById("commentsBody");
+
+      if (!comments.length) {
+        body.innerHTML = '<div class="no-comments">💤 No comments yet</div>';
+      } else {
+        body.innerHTML = comments
+          .map((c) => {
+            const initials = (c.user || "?").substring(0, 2).toUpperCase();
+            const answerBadge = c.answer ? `<span class="comment-answer">Answer: ${c.answer}</span>` : "";
+            const textFormatted = (c.text || "").replace(/\n/g, "<br>");
+            return `
+              <div class="comment-card">
+                <div class="comment-header">
+                  <div class="comment-avatar">${initials}</div>
+                  <span class="comment-user">${c.user || "Anonymous"}</span>
+                  ${answerBadge}
+                </div>
+                <div class="comment-body">${textFormatted}</div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      document.getElementById("commentsModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeComments() {
+      document.getElementById("commentsModal").classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    function closeCommentsOutside(e) {
+      if (e.target === document.getElementById("commentsModal")) closeComments();
+    }
+
+    /* ===== IMAGE ZOOM ===== */
+    function zoomImage(src) {
+      document.getElementById("imgModalSrc").src = src;
+      document.getElementById("imgModal").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeImageModal() {
+      document.getElementById("imgModal").classList.remove("show");
+      document.body.style.overflow = "";
+    }
+  </script>
+</body>
+</html>

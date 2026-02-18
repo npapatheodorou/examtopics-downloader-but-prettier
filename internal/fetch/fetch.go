@@ -2,17 +2,15 @@ package fetch
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
+	"regexp"
+	"sort"
 	"strconv"
 	"strings"
-	"sync"
 
 	"examtopics-downloader/internal/constants"
-	"examtopics-downloader/internal/models"
 	"examtopics-downloader/internal/utils"
 
 	"github.com/PuerkitoBio/goquery"
@@ -20,20 +18,24 @@ import (
 
 var client = utils.NewHTTPClient()
 
+var (
+	providerHrefPattern = regexp.MustCompile(`(?i)^/exams/([a-z0-9-]+)/?$`)
+)
+
 func FetchURL(url string, client http.Client) []byte {
 	backoff := constants.InitalBackoff
 
 	for attempt := 0; attempt <= constants.MaxRetries; attempt++ {
 		if attempt > 0 {
 			delay := utils.DelayTime(backoff)
-			log.Printf("Retry attempt %d for URL: %s after waiting %v", attempt, url, delay)
+			debugf("Retry attempt %d for URL: %s after waiting %v", attempt, url, delay)
 			utils.Sleep(delay)
 			backoff = utils.BackoffTime(backoff, constants.BackoffFactor)
 		}
 
 		resp, err := client.Get(url)
 		if err != nil {
-			log.Printf("failed to fetch URL (attempt %d): %v", attempt, err)
+			debugf("failed to fetch URL (attempt %d): %v", attempt, err)
 			continue
 		}
 
@@ -41,7 +43,7 @@ func FetchURL(url string, client http.Client) []byte {
 			body, err := io.ReadAll(resp.Body)
 			resp.Body.Close()
 			if err != nil {
-				log.Printf("failed to read response body: %v", err)
+				debugf("failed to read response body: %v", err)
 				return nil
 			}
 			return body
@@ -49,12 +51,12 @@ func FetchURL(url string, client http.Client) []byte {
 		resp.Body.Close()
 
 		if resp.StatusCode != http.StatusServiceUnavailable {
-			log.Printf("request failed with status code: %d", resp.StatusCode)
+			debugf("request failed with status code: %d", resp.StatusCode)
 			return nil
 		}
 	}
 
-	log.Printf("exhausted retries for URL: %s", url)
+	debugf("exhausted retries for URL: %s", url)
 	return nil
 }
 
@@ -76,7 +78,8 @@ func ParseHTML(url string, client http.Client) (*goquery.Document, error) {
 func getMaxNumPages(url string) int {
 	doc, err := ParseHTML(url, *client)
 	if err != nil {
-		log.Panicf("Failed parsing HTML for number of pages: %v", err)
+		debugf("failed parsing HTML for number of pages: %v", err)
+		return 1
 	}
 
 	var pageCount int
@@ -94,21 +97,82 @@ func getMaxNumPages(url string) int {
 	return pageCount
 }
 
+func GetAllProviders() []string {
+	doc, err := ParseHTML("https://www.examtopics.com/exams/", *client)
+	if err != nil {
+		debugf("failed to parse HTML for providers: %v", err)
+		return nil
+	}
+
+	seen := map[string]struct{}{}
+	providers := make([]string, 0, 32)
+
+	doc.Find("a").Each(func(i int, s *goquery.Selection) {
+		href, exists := s.Attr("href")
+		if !exists {
+			return
+		}
+
+		href = strings.TrimSpace(strings.ToLower(href))
+		matches := providerHrefPattern.FindStringSubmatch(href)
+		if len(matches) != 2 {
+			return
+		}
+
+		provider := strings.TrimSpace(matches[1])
+		if provider == "" {
+			return
+		}
+		if _, exists := seen[provider]; exists {
+			return
+		}
+		seen[provider] = struct{}{}
+		providers = append(providers, provider)
+	})
+
+	sort.Strings(providers)
+	return providers
+}
+
 func GetProviderExams(providerName string) []string {
+	providerName = strings.TrimSpace(strings.ToLower(providerName))
 	baseURL := fmt.Sprintf("https://www.examtopics.com/exams/%s/", providerName)
 	doc, err := ParseHTML(baseURL, *client)
 	if err != nil {
-		log.Fatalf("Failed to parse HTML for provider exams: %v", err)
+		debugf("failed to parse HTML for provider exams: %v", err)
+		return nil
 	}
 
-	var allExams []string
-	doc.Find(".popular-exam-link").Each(func(i int, s *goquery.Selection) {
+	examHrefPattern := regexp.MustCompile(fmt.Sprintf(`(?i)^/exams/%s/([a-z0-9-]+)/?$`, regexp.QuoteMeta(providerName)))
+	seen := map[string]struct{}{}
+	allExams := make([]string, 0, 32)
+
+	doc.Find("a").Each(func(i int, s *goquery.Selection) {
 		href, exists := s.Attr("href")
-		if exists {
-			allExams = append(allExams, utils.CleanText(href))
+		if !exists {
+			return
 		}
+
+		cleanHref := strings.TrimSpace(strings.ToLower(href))
+		matches := examHrefPattern.FindStringSubmatch(cleanHref)
+		if len(matches) != 2 {
+			return
+		}
+
+		examSlug := strings.TrimSpace(matches[1])
+		if examSlug == "" {
+			return
+		}
+
+		normalized := fmt.Sprintf("/exams/%s/%s/", providerName, examSlug)
+		if _, exists := seen[normalized]; exists {
+			return
+		}
+		seen[normalized] = struct{}{}
+		allExams = append(allExams, normalized)
 	})
 
+	sort.Strings(allExams)
 	return allExams
 }
 
@@ -116,7 +180,7 @@ func GetProviderExams(providerName string) []string {
 func getLinksFromPage(url string, grepStr string) []string {
 	doc, err := ParseHTML(url, *client)
 	if err != nil {
-		log.Printf("Failed to parse HTML for %s: %v", url, err)
+		debugf("failed to parse HTML for %s: %v", url, err)
 		return nil
 	}
 
@@ -129,73 +193,4 @@ func getLinksFromPage(url string, grepStr string) []string {
 	})
 
 	return matchingLinks
-}
-
-func FetchCachedLinks(providerName string, grepStr string, token string) []string {
-	parsedProviderName := utils.CapitalizeFirstLetter(strings.ToLower(providerName))
-	baseURL := fmt.Sprintf("https://api.github.com/repos/thatonecodes/examtopics-data/contents/%s", parsedProviderName)
-	if token != "" {
-		client = utils.NewGitHubClient(token)
-	}
-	resp := FetchURL(baseURL, *client)
-
-	var content []models.FileInfo
-
-	if resp == nil {
-		log.Printf("the response body was nil, %v", resp)
-		return nil
-	}
-
-	err := json.Unmarshal(resp, &content)
-	if err != nil {
-		log.Fatalf("error unmarshaling response: %v", err)
-	}
-
-	var linksWithNumbers []models.FileInfo
-	for _, item := range content {
-		link := item.URL
-		number := utils.ExtractNumberFromPath(item.Name)
-		if utils.GrepStringFromCache(link, grepStr) {
-			linksWithNumbers = append(linksWithNumbers, models.FileInfo{
-				URL:    link,
-				Name:   item.Name,
-				Number: number,
-			})
-		}
-	}
-
-	return utils.SortCachedLinks(linksWithNumbers)
-}
-
-func GetCachedPages(providerName string, grepStr string, token string) []models.QuestionData {
-	links := FetchCachedLinks(providerName, grepStr, token)
-	var allData []models.QuestionData
-
-	var wg sync.WaitGroup
-	dataChan := make(chan models.QuestionData)
-
-	for _, link := range links {
-		wg.Add(1)
-		go func(link string) {
-			defer wg.Done()
-			dataList := getJSONFromLink(link)
-			if dataList == nil {
-				return
-			}
-			for _, data := range dataList {
-				dataChan <- *data // send each QuestionData into the channel
-			}
-		}(link)
-	}
-
-	go func() {
-		wg.Wait()
-		close(dataChan)
-	}()
-
-	for data := range dataChan {
-		allData = append(allData, data)
-	}
-
-	return utils.SortQuestionDataByPageNumber(allData)
 }

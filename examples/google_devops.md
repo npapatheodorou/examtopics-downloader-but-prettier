@@ -15,7 +15,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a Node.js application running on Google Kubernetes Engine (GKE) in production. The application makes several HTTP requests to dependent applications. You want to anticipate which dependent applications might cause performance issues. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Instrument all applications with Stackdriver Profiler.
 
@@ -46,7 +46,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You created a Stackdriver chart for CPU utilization in a dashboard within your workspace project. You want to share the chart with your Site Reliability Engineering(SRE) team only. You want to ensure you follow the principle of least privilege. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Share the workspace Project ID with the SRE team. Assign the SRE team the Monitoring Viewer IAM role in the workspace project.
 
@@ -77,7 +77,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization wants to implement Site Reliability Engineering (SRE) culture and principles. Recently, a service that you support had a limited outage. A manager on another team asks you to provide a formal explanation of what happened so they can action remediations. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Develop a postmortem that includes the root causes, resolution, lessons learned, and a prioritized list of action items. Share it with the manager only.
 
@@ -108,7 +108,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have a set of applications running on a Google Kubernetes Engine (GKE) cluster, and you are using Stackdriver Kubernetes Engine Monitoring. You are bringing a new containerized application required by your company into production. This application is written by a third party and cannot be modified or reconfigured. The application writes its log information to /var/log/app_messages.log, and you want to send these log entries to Stackdriver Logging. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Use the default Stackdriver Kubernetes Engine Monitoring agent configuration.
 
@@ -139,7 +139,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are running an application in a virtual machine (VM) using a custom Debian image. The image has the Stackdriver Logging agent installed. The VM has the cloud-platform scope. The application is logging information via syslog. You want to use Stackdriver Logging in the Google Cloud Platform Console to visualize the logs. You notice that syslog is not showing up in the "All logs" dropdown list of the Logs Viewer. What is the first thing you should do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Look for the agent's test log entry in the Logs Viewer.
 
@@ -170,7 +170,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You use a multiple step Cloud Build pipeline to build and deploy your application to Google Kubernetes Engine (GKE). You want to integrate with a third-party monitoring platform by performing a HTTP POST of the build information to a webhook. You want to minimize the development effort. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Add logic to each Cloud Build step to HTTP POST the build information to a webhook.
 
@@ -201,7 +201,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You use Spinnaker to deploy your application and have created a canary deployment stage in the pipeline. Your application has an in-memory cache that loads objects at start time. You want to automate the comparison of the canary version against the production version. How should you configure the canary analysis?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Compare the canary with a new deployment of the current production version.
 
@@ -232,7 +232,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a high-traffic web application and want to ensure that the home page loads in a timely manner. As a first step, you decide to implement a ServiceLevel Indicator (SLI) to represent home page request latency with an acceptable page load time set to 100 ms. What is the Google-recommended way of calculating this SLI?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Bucketize the request latencies into ranges, and then compute the percentile at 100 ms.
 
@@ -263,7 +263,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You deploy a new release of an internal application during a weekend maintenance window when there is minimal user tragic. After the window ends, you learn that one of the new features isn't working as expected in the production environment. After an extended outage, you roll back the new release and deploy a fix.You want to modify your release process to reduce the mean time to recovery so you can avoid extended outages in the future. What should you do? (Choose two.)
-Suggested Answer: BE 🗳️
+Suggested Answer: BE 
 
 A. Before merging new code, require 2 different peers to review the code changes.
 
@@ -296,7 +296,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have a pool of application servers running on Compute Engine. You need to provide a secure solution that requires the least amount of configuration and allows developers to easily access application logs for troubleshooting. How would you implement the solution on GCP?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. ג€¢ Deploy the Stackdriver logging agent to the application servers. ג€¢ Give the developers the IAM Logs Viewer role to access Stackdriver and view logs.
 
@@ -327,7 +327,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support the backend of a mobile phone game that runs on a Google Kubernetes Engine (GKE) cluster. The application is serving HTTP requests from users.You need to implement a solution that will reduce the network cost. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Configure the VPC as a Shared VPC Host project.
 
@@ -358,7 +358,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You encountered a major service outage that affected all users of the service for multiple hours. After several hours of incident management, the service returned to normal, and user access was restored. You need to provide an incident summary to relevant stakeholders following the Site Reliability Engineering recommended practices. What should you do first?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Call individual stakeholders to explain what happened.
 
@@ -389,7 +389,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are performing a semi-annual capacity planning exercise for your flagship service. You expect a service user growth rate of 10% month-over-month over the next six months. Your service is fully containerized and runs on Google Cloud Platform (GCP), using a Google Kubernetes Engine (GKE) Standard regional cluster on three zones with cluster autoscaler enabled. You currently consume about 30% of your total deployed CPU capacity, and you require resilience against the failure of a zone. You want to ensure that your users experience minimal negative impact as a result of this growth or as a result of zone failure, while avoiding unnecessary costs. How should you prepare to handle the predicted growth?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Verify the maximum node pool size, enable a horizontal pod autoscaler, and then perform a load test to verify your expected resource needs.
 
@@ -420,7 +420,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your application images are built and pushed to Google Container Registry (GCR). You want to build an automated pipeline that deploys the application when the image is updated while minimizing the development effort. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Use Cloud Build to trigger a Spinnaker pipeline.
 
@@ -451,7 +451,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your product is currently deployed in three Google Cloud Platform (GCP) zones with your users divided between the zones. You can fail over from one zone to another, but it causes a 10-minute service disruption for the affected users. You typically experience a database failure once per quarter and can detect it within five minutes. You are cataloging the reliability risks of a new real-time chat feature for your product. You catalog the following information for each risk:_ Mean Time to Detect (MTTD) in minutes_ Mean Time to Repair (MTTR) in minutes* Mean Time Between Failure (MTBF) in days* User Impact PercentageThe chat feature requires a new database system that takes twice as long to successfully fail over between zones. You want to account for the risk of the new database failing in one zone. What would be the values for the risk of database failover with the new system?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. MTTD: 5 MTTR: 10 MTBF: 90 Impact: 33%
 
@@ -482,7 +482,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are managing the production deployment to a set of Google Kubernetes Engine (GKE) clusters. You want to make sure only images which are successfully built by your trusted CI/CD pipeline are deployed to production. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Enable Cloud Security Scanner on the clusters.
 
@@ -513,7 +513,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support an e-commerce application that runs on a large Google Kubernetes Engine (GKE) cluster deployed on-premises and on Google Cloud Platform. The application consists of microservices that run in containers. You want to identify containers that are using the most CPU and memory. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Use Stackdriver Kubernetes Engine Monitoring.
 
@@ -544,7 +544,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company experiences bugs, outages, and slowness in its production systems. Developers use the production environment for new feature development and bug fixes. Configuration and experiments are done in the production environment, causing outages for users. Testers use the production environment for load testing, which often slows the production systems. You need to redesign the environment to reduce the number of bugs and outages in production and to enable testers to toad test new features. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create an automated testing script in production to detect failures as soon as they occur.
 
@@ -575,7 +575,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support an application running on App Engine. The application is used globally and accessed from various device types. You want to know the number of connections. You are using Stackdriver Monitoring for App Engine. What metric should you use?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. flex/connections/current
 
@@ -606,7 +606,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support an application deployed on Compute Engine. The application connects to a Cloud SQL instance to store and retrieve data. After an update to the application, users report errors showing database timeout messages. The number of concurrent active users remained stable. You need to find the most probable cause of the database timeout. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Check the serial port logs of the Compute Engine instance.
 
@@ -637,7 +637,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your application images are built using Cloud Build and pushed to Google Container Registry (GCR). You want to be able to specify a particular version of your application for deployment based on the release version tagged in source control. What should you do when you push the image?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Reference the image digest in the source control tag.
 
@@ -668,7 +668,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are on-call for an infrastructure service that has a large number of dependent systems. You receive an alert indicating that the service is failing to serve most of its requests and all of its dependent systems with hundreds of thousands of users are affected. As part of your Site Reliability Engineering (SRE) incident management protocol, you declare yourself Incident Commander (IC) and pull in two experienced people from your team as Operations Lead (OL) andCommunications Lead (CL). What should you do next?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Look for ways to mitigate user impact and deploy the mitigations to production.
 
@@ -699,7 +699,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are developing a strategy for monitoring your Google Cloud Platform (GCP) projects in production using Stackdriver Workspaces. One of the requirements is to be able to quickly identify and react to production environment issues without false alerts from development and staging projects. You want to ensure that you adhere to the principle of least privilege when providing relevant team members with access to Stackdriver Workspaces. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Grant relevant team members read access to all GCP production projects. Create Stackdriver workspaces inside each project.
 
@@ -730,7 +730,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You currently store the virtual machine (VM) utilization logs in Stackdriver. You need to provide an easy-to-share interactive VM utilization dashboard that is updated in real time and contains information aggregated on a quarterly basis. You want to use Google Cloud Platform solutions. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. 1. Export VM utilization logs from Stackdriver to BigQuery. 2. Create a dashboard in Data Studio. 3. Share the dashboard with your stakeholders.
 
@@ -761,7 +761,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to run a business-critical workload on a fixed set of Compute Engine instances for several months. The workload is stable with the exact amount of resources allocated to it. You want to lower the costs for this workload without any performance implications. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Purchase Committed Use Discounts.
 
@@ -792,7 +792,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are part of an organization that follows SRE practices and principles. You are taking over the management of a new service from the Development Team, and you conduct a Production Readiness Review (PRR). After the PRR analysis phase, you determine that the service cannot currently meet its Service LevelObjectives (SLOs). You want to ensure that the service can meet its SLOs in production. What should you do next?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Adjust the SLO targets to be achievable by the service so you can bring it into production.
 
@@ -823,7 +823,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are running an experiment to see whether your users like a new feature of a web application. Shortly after deploying the feature as a canary release, you receive a spike in the number of 500 errors sent to users, and your monitoring reports show increased latency. You want to quickly minimize the negative impact on users. What should you do first?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Roll back the experimental canary release.
 
@@ -854,7 +854,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are responsible for creating and modifying the Terraform templates that define your Infrastructure. Because two new engineers will also be working on the same code, you need to define a process and adopt a tool that will prevent you from overwriting each other's code. You also want to ensure that you capture all updates in the latest version. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. ג€¢ Store your code in a Git-based version control system. ג€¢ Establish a process that allows developers to merge their own changes at the end of each day. ג€¢ Package and upload code to a versioned Cloud Storage basket as the latest master version.
 
@@ -885,7 +885,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a high-traffic web application with a microservice architecture. The home page of the application displays multiple widgets containing content such as the current weather, stock prices, and news headlines. The main serving thread makes a call to a dedicated microservice for each widget and then lays out the homepage for the user. The microservices occasionally fail; when that happens, the serving thread serves the homepage with some missing content. Users of the application are unhappy if this degraded mode occurs too frequently, but they would rather have some content served instead of no content at all. You want to set a Service Level Objective (SLO) to ensure that the user experience does not degrade too much. What Service Level Indicator (SLI) should you use to measure this?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. A quality SLI: the ratio of non-degraded responses to total responses.
 
@@ -916,7 +916,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a multi-region web service running on Google Kubernetes Engine (GKE) behind a Global HTTP/S Cloud Load Balancer (CLB). For legacy reasons, user requests first go through a third-party Content Delivery Network (CDN), which then routes traffic to the CLB. You have already implemented an availabilityService Level Indicator (SLI) at the CLB level. However, you want to increase coverage in case of a potential load balancer misconfiguration, CDN failure, or other global networking catastrophe. Where should you measure this new SLI? (Choose two.)
-Suggested Answer: BE 🗳️
+Suggested Answer: BE 
 
 A. Your application servers' logs.
 
@@ -949,7 +949,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team is designing a new application for deployment into Google Kubernetes Engine (GKE). You need to set up monitoring to collect and aggregate various application-level metrics in a centralized location. You want to use Google Cloud Platform services while minimizing the amount of work required to set up monitoring. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Publish various metrics from the application directly to the Stackdriver Monitoring API, and then observe these custom metrics in Stackdriver.
 
@@ -980,7 +980,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a production service that runs on a single Compute Engine instance. You regularly need to spend time on recreating the service by deleting the crashing instance and creating a new instance based on the relevant image. You want to reduce the time spent performing manual operations while following SiteReliability Engineering principles. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. File a bug with the development team so they can find the root cause of the crashing instance.
 
@@ -1011,7 +1011,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your application artifacts are being built and deployed via a CI/CD pipeline. You want the CI/CD pipeline to securely access application secrets. You also want to more easily rotate secrets in case of a security breach. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Prompt developers for secrets at build time. Instruct developers to not store secrets at rest.
 
@@ -1042,7 +1042,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company follows Site Reliability Engineering practices. You are the person in charge of Communications for a large, ongoing incident affecting your customer-facing applications. There is still no estimated time for a resolution of the outage. You are receiving emails from internal stakeholders who want updates on the outage, as well as emails from customers who want to know what is happening. You want to efficiently provide updates to everyone affected by the outage.What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Focus on responding to internal stakeholders at least every 30 minutes. Commit to ג€next updateג€ times.
 
@@ -1073,7 +1073,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team uses Cloud Build for all CI/CD pipelines. You want to use the kubectl builder for Cloud Build to deploy new images to Google Kubernetes Engine(GKE). You need to authenticate to GKE while minimizing development effort. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Assign the Container Developer role to the Cloud Build service account.
 
@@ -1104,7 +1104,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support an application that stores product information in cached memory. For every cache miss, an entry is logged in Stackdriver Logging. You want to visualize how often a cache miss happens over time. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Link Stackdriver Logging as a source in Google Data Studio. Filter the logs on the cache misses.
 
@@ -1135,7 +1135,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to deploy a new service to production. The service needs to automatically scale using a Managed Instance Group (MIG) and should be deployed over multiple regions. The service needs a large number of resources for each instance and you need to plan for capacity. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Use the n1-highcpu-96 machine type in the configuration of the MIG.
 
@@ -1166,7 +1166,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are running an application on Compute Engine and collecting logs through Stackdriver. You discover that some personally identifiable information (PII) is leaking into certain log entry fields. All PII entries begin with the text userinfo. You want to capture these log entries in a secure location for later review and prevent them from leaking to Stackdriver Logging. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Create a basic log filter matching userinfo, and then configure a log export in the Stackdriver console with Cloud Storage as a sink.
 
@@ -1197,7 +1197,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have a CI/CD pipeline that uses Cloud Build to build new Docker images and push them to Docker Hub. You use Git for code versioning. After making a change in the Cloud Build YAML configuration, you notice that no new artifacts are being built by the pipeline. You need to resolve the issue following SiteReliability Engineering practices. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Disable the CI pipeline and revert to manually building and pushing the artifacts.
 
@@ -1228,7 +1228,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company follows Site Reliability Engineering principles. You are writing a postmortem for an incident, triggered by a software change, that severely affected users. You want to prevent severe incidents from happening in the future. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Identify engineers responsible for the incident and escalate to their senior management.
 
@@ -1259,7 +1259,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a high-traffic web application that runs on Google Cloud Platform (GCP). You need to measure application reliability from a user perspective without making any engineering changes to it. What should you do? (Choose two.)
-Suggested Answer: DE 🗳️
+Suggested Answer: DE 
 
 A. Review current application metrics and add new ones as needed.
 
@@ -1292,7 +1292,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You manage an application that is writing logs to Stackdriver Logging. You need to give some team members the ability to export logs. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Grant the team members the IAM role of logging.configWriter on Cloud IAM.
 
@@ -1323,7 +1323,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your application services run in Google Kubernetes Engine (GKE). You want to make sure that only images from your centrally-managed Google ContainerRegistry (GCR) image registry in the altostrat-images project can be deployed to the cluster while minimizing development time. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Create a custom builder for Cloud Build that will only push images to gcr.io/altostrat-images.
 
@@ -1354,7 +1354,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team has recently deployed an NGINX-based application into Google Kubernetes Engine (GKE) and has exposed it to the public via an HTTP Google CloudLoad Balancer (GCLB) ingress. You want to scale the deployment of the application's frontend using an appropriate Service Level Indicator (SLI). What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Configure the horizontal pod autoscaler to use the average response time from the Liveness and Readiness probes.
 
@@ -1385,7 +1385,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company follows Site Reliability Engineering practices. You are the Incident Commander for a new, customer-impacting incident. You need to immediately assign two incident management roles to assist you in an effective incident response. What roles should you assign? (Choose two.)
-Suggested Answer: AC 🗳️
+Suggested Answer: AC 
 
 A. Operations Lead
 
@@ -1418,7 +1418,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support an application running on GCP and want to configure SMS notifications to your team for the most critical alerts in Stackdriver Monitoring. You have already identified the alerting policies you want to configure this for. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Download and configure a third-party integration between Stackdriver Monitoring and an SMS gateway. Ensure that your team members add their SMS/phone numbers to the external tool.
 
@@ -1449,7 +1449,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are managing an application that exposes an HTTP endpoint without using a load balancer. The latency of the HTTP responses is important for the user experience. You want to understand what HTTP latencies all of your users are experiencing. You use Stackdriver Monitoring. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. ג€¢ In your application, create a metric with a metricKind set to DELTA and a valueType set to DOUBLE. ג€¢ In Stackdriver's Metrics Explorer, use a Stacked Bar graph to visualize the metric.
 
@@ -1480,7 +1480,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team is designing a new application for deployment both inside and outside Google Cloud Platform (GCP). You need to collect detailed metrics such as system resource utilization. You want to use centralized GCP services while minimizing the amount of work required to set up this collection system. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Import the Stackdriver Profiler package, and configure it to relay function timing data to Stackdriver for further analysis.
 
@@ -1511,7 +1511,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to reduce the cost of virtual machines (VM) for your organization. After reviewing different options, you decide to leverage preemptible VM instances.Which application is suitable for preemptible VMs?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. A scalable in-memory caching system.
 
@@ -1542,7 +1542,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization recently adopted a container-based workflow for application development. Your team develops numerous applications that are deployed continuously through an automated build pipeline to a Kubernetes cluster in the production environment. The security auditor is concerned that developers or operators could circumvent automated testing and push code changes to production without approval. What should you do to enforce approvals?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Configure the build system with protected branches that require pull request approval.
 
@@ -1573,7 +1573,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a stateless web-based API that is deployed on a single Compute Engine instance in the europe-west2-a zone. The Service Level Indicator (SLI) for service availability is below the specified Service Level Objective (SLO). A postmortem has revealed that requests to the API regularly time out. The time outs are due to the API having a high number of requests and running out memory. You want to improve service availability. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Change the specified SLO to match the measured SLI
 
@@ -1604,7 +1604,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are running a real-time gaming application on Compute Engine that has a production and testing environment. Each environment has their own Virtual PrivateCloud (VPC) network. The application frontend and backend servers are located on different subnets in the environment's VPC. You suspect there is a malicious process communicating intermittently in your production frontend servers. You want to ensure that network traffic is captured for analysis. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Enable VPC Flow Logs on the production VPC network frontend and backend subnets only with a sample volume scale of 0.5.
 
@@ -1635,7 +1635,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team of Infrastructure DevOps Engineers is growing, and you are starting to use Terraform to manage infrastructure. You need a way to implement code versioning and to share code with other team members. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Store the Terraform code in a version-control system. Establish procedures for pushing new versions and merging with the master.
 
@@ -1666,7 +1666,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are using Stackdriver to monitor applications hosted on Google Cloud Platform (GCP). You recently deployed a new application, but its logs are not appearing on the Stackdriver dashboard.You need to troubleshoot the issue. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Confirm that the Stackdriver agent has been installed in the hosting virtual machine.
 
@@ -1697,7 +1697,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization recently adopted a container-based workflow for application development. Your team develops numerous applications that are deployed continuously through an automated build pipeline to the production environment. A recent security audit alerted your team that the code pushed to production could contain vulnerabilities and that the existing tooling around virtual machine (VM) vulnerabilities no longer applies to the containerized environment. You need to ensure the security and patch level of all code running through the pipeline. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Set up Container Analysis to scan and report Common Vulnerabilities and Exposures.
 
@@ -1728,7 +1728,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You use Cloud Build to build your application. You want to reduce the build time while minimizing cost and development effort. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Use Cloud Storage to cache intermediate artifacts.
 
@@ -1759,7 +1759,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a web application that is hosted on Compute Engine. The application provides a booking service for thousands of users. Shortly after the release of a new feature, your monitoring dashboard shows that all users are experiencing latency at login. You want to mitigate the impact of the incident on the users of your service. What should you do first?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Roll back the recent release.
 
@@ -1790,7 +1790,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are deploying an application that needs to access sensitive information. You need to ensure that this information is encrypted and the risk of exposure is minimal if a breach occurs. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Store the encryption keys in Cloud Key Management Service (KMS) and rotate the keys frequently
 
@@ -1821,7 +1821,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You encounter a large number of outages in the production systems you support. You receive alerts for all the outages that wake you up at night. The alerts are due to unhealthy systems that are automatically restarted within a minute. You want to set up a process that would prevent staff burnout while following SiteReliability Engineering practices. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Eliminate unactionable alerts.
 
@@ -1852,7 +1852,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have migrated an e-commerce application to Google Cloud Platform (GCP). You want to prepare the application for the upcoming busy season. What should you do first to prepare for the busy season?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Load teat the application to profile its performance for scaling.
 
@@ -1883,7 +1883,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a web application that runs on App Engine and uses CloudSQL and Cloud Storage for data storage. After a short spike in website traffic, you notice a big increase in latency for all user requests, increase in CPU use, and the number of processes running the application. Initial troubleshooting reveals:✑ After the initial spike in traffic, load levels returned to normal but users still experience high latency.✑ Requests for content from the CloudSQL database and images from Cloud Storage show the same high latency.✑ No changes were made to the website around the time the latency increased.✑ There is no increase in the number of errors to the users.You expect another spike in website traffic in the coming days and want to make sure users don't experience latency. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Upgrade the GCS buckets to Multi-Regional.
 
@@ -1914,7 +1914,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your application runs on Google Cloud Platform (GCP). You need to implement Jenkins for deploying application releases to GCP. You want to streamline the release process, lower operational toil, and keep user data secure. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Implement Jenkins on local workstations.
 
@@ -1945,7 +1945,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are working with a government agency that requires you to archive application logs for seven years. You need to configure Stackdriver to export and store the logs while minimizing costs of storage. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create a Cloud Storage bucket and develop your application to send logs directly to the bucket.
 
@@ -1976,7 +1976,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a trading application written in Python and hosted on App Engine flexible environment. You want to customize the error information being sent toStackdriver Error Reporting. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Install the Stackdriver Error Reporting library for Python, and then run your code on a Compute Engine VM.
 
@@ -2007,7 +2007,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to define Service Level Objectives (SLOs) for a high-traffic multi-region web application. Customers expect the application to always be available and have fast response times. Customers are currently happy with the application performance and availability. Based on current measurement, you observe that the90percentile of latency is 120ms and the 95percentile of latency is 275ms over a 28-day window. What latency SLO would you recommend to the team to th th publish?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. 90 percentile ג€" 100ms th 95 percentile ג€" 250ms th
 
@@ -2038,7 +2038,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a large service with a well-defined Service Level Objective (SLO). The development team deploys new releases of the service multiple times a week.If a major incident causes the service to miss its SLO, you want the development team to shift its focus from working on features to improving service reliability.What should you do before a major incident occurs?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Develop an appropriate error budget policy in cooperation with all service stakeholders.
 
@@ -2069,7 +2069,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company is developing applications that are deployed on Google Kubernetes Engine (GKE). Each team manages a different application. You need to create the development and production environments for each team, while minimizing costs. Different teams should not be able to access other teams' environments.What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create one GCP Project per team. In each project, create a cluster for Development and one for Production. Grant the teams IAM access to their respective clusters.
 
@@ -2100,7 +2100,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Some of your production services are running in Google Kubernetes Engine (GKE) in the eu-west-1 region. Your build system runs in the us-west-1 region. You want to push the container images from your build system to a scalable registry to maximize the bandwidth for transferring the images to the cluster. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Push the images to Google Container Registry (GCR) using the gcr.io hostname.
 
@@ -2131,7 +2131,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You manage several production systems that run on Compute Engine in the same Google Cloud Platform (GCP) project. Each system has its own set of dedicated Compute Engine instances. You want to know how must it costs to run each of the systems. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. In the Google Cloud Platform Console, use the Cost Breakdown section to visualize the costs per system.
 
@@ -2162,7 +2162,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You use Cloud Build to build and deploy your application. You want to securely incorporate database credentials and other application secrets into the build pipeline. You also want to minimize the development effort. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create a Cloud Storage bucket and use the built-in encryption at rest. Store the secrets in the bucket and grant Cloud Build access to the bucket.
 
@@ -2193,7 +2193,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a popular mobile game application deployed on Google Kubernetes Engine (GKE) across several Google Cloud regions. Each region has multipleKubernetes clusters. You receive a report that none of the users in a specific region can connect to the application. You want to resolve the incident while following Site Reliability Engineering practices. What should you do first?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Reroute the user traffic from the affected region to other regions that don't report issues.
 
@@ -2224,7 +2224,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are writing a postmortem for an incident that severely affected users. You want to prevent similar incidents in the future. Which two of the following sections should you include in the postmortem? (Choose two.)
-Suggested Answer: AC 🗳️
+Suggested Answer: AC 
 
 A. An explanation of the root cause of the incident.
 
@@ -2257,7 +2257,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are ready to deploy a new feature of a web-based application to production. You want to use Google Kubernetes Engine (GKE) to perform a phased rollout to half of the web server pods.What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Use a partitioned rolling update.
 
@@ -2288,7 +2288,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are responsible for the reliability of a high-volume enterprise application. A large number of users report that an important subset of the application's functionality `" a data intensive reporting feature `" is consistently failing with an HTTP 500 error. When you investigate your application's dashboards, you notice a strong correlation between the failures and a metric that represents the size of an internal queue used for generating reports. You trace the failures to a reporting backend that is experiencing high I/O wait times. You quickly fix the issue by resizing the backend's persistent disk (PD). How you need to create an availabilityService Level Indicator (SLI) for the report generation feature. How would you define it?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. As the I/O wait times aggregated across all report generation backends
 
@@ -2319,7 +2319,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have an application running in Google Kubernetes Engine. The application invokes multiple services per request but responds too slowly. You need to identify which downstream service or services are causing the delay. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Analyze VPC flow logs along the path of the request.
 
@@ -2350,7 +2350,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are creating and assigning action items in a postmodern for an outage. The outage is over, but you need to address the root causes. You want to ensure that your team handles the action items quickly and efficiently. How should you assign owners and collaborators to action items?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Assign one owner for each action item and any necessary collaborators.
 
@@ -2381,7 +2381,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your development team has created a new version of their service's API. You need to deploy the new versions of the API with the least disruption to third-party developers and end users of third-party installed applications. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Introduce the new version of the API. Announce deprecation of the old version of the API. Deprecate the old version of the API. Contact remaining users of the old API. Provide best effort support to users of the old API. Turn down the old version of the API.
 
@@ -2412,7 +2412,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are running an application on Compute Engine and collecting logs through Stackdriver. You discover that some personally identifiable information (PII) is leaking into certain log entry fields. You want to prevent these fields from being written in new log entries as quickly as possible. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Use the filter-record-transformer Fluentd filter plugin to remove the fields from the log entries in flight.
 
@@ -2443,7 +2443,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a service that recently had an outage. The outage was caused by a new release that exhausted the service memory resources. You rolled back the release successfully to mitigate the impact on users. You are now in charge of the post-mortem for the outage. You want to follow Site Reliability Engineering practices when developing the post-mortem. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Focus on developing new features rather than avoiding the outages from recurring.
 
@@ -2474,7 +2474,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a user-facing web application. When analyzing the application's error budget over the previous six months, you notice that the application has never consumed more than 5% of its error budget in any given time window. You hold a Service Level Objective (SLO) review with business stakeholders and confirm that the SLO is set appropriately. You want your application's SLO to more closely reflect its observed reliability. What steps can you take to further that goal while balancing velocity, reliability, and business needs? (Choose two.)
-Suggested Answer: DE 🗳️
+Suggested Answer: DE 
 
 A. Add more serving capacity to all of your application's zones.
 
@@ -2507,7 +2507,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You support a service with a well-defined Service Level Objective (SLO). Over the previous 6 months, your service has consistently met its SLO and customer satisfaction has been consistently high. Most of your service's operations tasks are automated and few repetitive tasks occur frequently. You want to optimize the balance between reliability and deployment velocity while following site reliability engineering best practices. What should you do? (Choose two.)
-Suggested Answer: BC 🗳️
+Suggested Answer: BC 
 
 A. Make the service's SLO more strict.
 
@@ -2540,7 +2540,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company follows Site Reliability Engineering principles. You are writing a postmortem for an incident, triggered by a software change that severely affected users. You want to prevent severe incident from happening in the future. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Identify engineers responsible for the incident and escalate to the senior management.
 
@@ -2571,7 +2571,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization uses a change advisory board (CAB) to approve all changes to an existing service. You want to revise this process to eliminate any negative impact on the software delivery performance. What should you do? (Choose two.)
-Suggested Answer: CE 🗳️
+Suggested Answer: CE 
 
 A. Replace the CAB with a senior manager to ensure continuous oversight from development to deployment.
 
@@ -2604,7 +2604,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization has a containerized web application that runs on-premises. As part of the migration plan to Google Cloud, you need to select a deployment strategy and platform that meets the following acceptance criteria:1. The platform must be able to direct traffic from Android devices to an Android-specific microservice.2. The platform must allow for arbitrary percentage-based traffic splitting3. The deployment strategy must allow for continuous testing of multiple versions of any microservice.What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Deploy the canary release of the application to Cloud Run. Use traffic splitting to direct 10% of user traffic to the canary release based on the revision tag.
 
@@ -2635,7 +2635,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team is running microservices in Google Kubernetes Engine (GKE). You want to detect consumption of an error budget to protect customers and define release policies. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Create SLIs from metrics. Enable Alert Policies if the services do not pass.
 
@@ -2666,7 +2666,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization wants to collect system logs that will be used to generate dashboards in Cloud Operations for their Google Cloud project. You need to configure all current and future Compute Engine instances to collect the system logs, and you must ensure that the Ops Agent remains up to date. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Use the gcloud CLI to install the Ops Agent on each VM listed in the Cloud Asset Inventory,
 
@@ -2697,7 +2697,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company has a Google Cloud resource hierarchy with folders for production, test, and development. Your cyber security team needs to review your company's Google Cloud security posture to accelerate security issue identification and resolution. You need to centralize the logs generated by Google Cloud services from all projects only inside your production folder to allow for alerting and near-real time analysis. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Enable the Workflows API and route all the logs to Cloud Logging.
 
@@ -2728,7 +2728,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are configuring the frontend tier of an application deployed in Google Cloud. The frontend tier is hosted in nginx and deployed using a managed instance group with an Envoy-based external HTTP(S) load balancer in front. The application is deployed entirely within the europe-west2 region, and only serves users based in the United Kingdom. You need to choose the most cost-effective network tier and load balancing configuration. What should you use?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Premium Tier with a global load balancer
 
@@ -2759,7 +2759,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You recently deployed your application in Google Kubernetes Engine (GKE) and now need to release a new version of the application. You need the ability to instantly roll back to the previous version of the application in case there are issues with the new version. Which deployment model should you use?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Perform a rolling deployment, and test your new application after the deployment is complete.
 
@@ -2790,7 +2790,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are building and deploying a microservice on Cloud Run for your organization. Your service is used by many applications internally. You are deploying a new release, and you need to test the new version extensively in the staging and production environments. You must minimize user and developer impact. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Deploy the new version of the service to the staging environment. Split the traffic, and allow 1% of traffic through to the latest version. Test the latest version. If the test passes, gradually roll out the latest version to the staging and production environments.
 
@@ -2821,7 +2821,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You work for a global organization and run a service with an availability target of 99% with limited engineering resources.For the current calendar month, you noticed that the service has 99.5% availability. You must ensure that your service meets the defined availability goals and can react to business changes, including the upcoming launch of new features.You also need to reduce technical debt while minimizing operational costs. You want to follow Google-recommended practices. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Add N+1 redundancy to your service by adding additional compute resources to the service.
 
@@ -2852,7 +2852,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are developing the deployment and testing strategies for your CI/CD pipeline in Google Cloud. You must be able to:• Reduce the complexity of release deployments and minimize the duration of deployment rollbacks.• Test real production traffic with a gradual increase in the number of affected users.You want to select a deployment and testing strategy that meets your requirements. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Recreate deployment and canary testing
 
@@ -2883,7 +2883,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are creating a CI/CD pipeline to perform Terraform deployments of Google Cloud resources. Your CI/CD tooling is running in Google Kubernetes Engine (GKE) and uses an ephemeral Pod for each pipeline run. You must ensure that the pipelines that run in the Pods have the appropriate Identity and Access Management (IAM) permissions to perform the Terraform deployments. You want to follow Google-recommended practices for identity management. What should you do? (Choose two.)
-Suggested Answer: AC 🗳️
+Suggested Answer: AC 
 
 A. Create a new Kubernetes service account, and assign the service account to the Pods. Use Workload Identity to authenticate as the Google service account.
 
@@ -2916,7 +2916,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are the on-call Site Reliability Engineer for a microservice that is deployed to a Google Kubernetes Engine (GKE) Autopilot cluster. Your company runs an online store that publishes order messages to Pub/Sub, and a microservice receives these messages and updates stock information in the warehousing system. A sales event caused an increase in orders, and the stock information is not being updated quickly enough. This is causing a large number of orders to be accepted for products that are out of stock. You check the metrics for the microservice and compare them to typical levels:You need to ensure that the warehouse system accurately reflects product inventory at the time orders are placed and minimize the impact on customers. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Decrease the acknowledgment deadline on the subscription.
 
@@ -2947,7 +2947,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team deploys applications to three Google Kubernetes Engine (GKE) environments: development, staging, and production. You use GitHub repositories as your source of truth. You need to ensure that the three environments are consistent. You want to follow Google-recommended practices to enforce and install network policies and a logging DaemonSet on all the GKE clusters in those environments. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Use Google Cloud Deploy to deploy the network policies and the DaemonSet. Use Cloud Monitoring to trigger an alert if the network policies and DaemonSet drift from your source in the repository.
 
@@ -2978,7 +2978,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are using Terraform to manage infrastructure as code within a CI/CD pipeline. You notice that multiple copies of the entire infrastructure stack exist in your Google Cloud project, and a new copy is created each time a change to the existing infrastructure is made. You need to optimize your cloud spend by ensuring that only a single instance of your infrastructure stack exists at a time. You want to follow Google-recommended practices. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Create a new pipeline to delete old infrastructure stacks when they are no longer needed.
 
@@ -3009,7 +3009,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are creating Cloud Logging sinks to export log entries from Cloud Logging to BigQuery for future analysis. Your organization has a Google Cloud folder named Dev that contains development projects and a folder named Prod that contains production projects. Log entries for development projects must be exported to dev_dataset, and log entries for production projects must be exported to prod_dataset. You need to minimize the number of log sinks created, and you want to ensure that the log sinks apply to future projects. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create a single aggregated log sink at the organization level.
 
@@ -3040,7 +3040,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs services by using multiple globally distributed Google Kubernetes Engine (GKE) clusters. Your operations team has set up workload monitoring that uses Prometheus-based tooling for metrics, alerts, and generating dashboards. This setup does not provide a method to view metrics globally across all clusters. You need to implement a scalable solution to support global Prometheus querying and minimize management overhead. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Configure Prometheus cross-service federation for centralized data access.
 
@@ -3071,7 +3071,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to build a CI/CD pipeline for a containerized application in Google Cloud. Your development team uses a central Git repository for trunk-based development. You want to run all your tests in the pipeline for any new versions of the application to improve the quality. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. 1. Install a Git hook to require developers to run unit tests before pushing the code to a central repository.2. Trigger Cloud Build to build the application container. Deploy the application container to a testing environment, and run integration tests.3. If the integration tests are successful, deploy the application container to your production environment, and run acceptance tests.
 
@@ -3102,7 +3102,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 The new version of your containerized application has been tested and is ready to be deployed to production on Google Kubernetes Engine (GKE). You could not fully load-test the new version in your pre-production environment, and you need to ensure that the application does not have performance problems after deployment. Your deployment must be automated. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Deploy the application through a continuous delivery pipeline by using canary deployments. Use Cloud Monitoring to look for performance issues, and ramp up traffic as supported by the metrics.
 
@@ -3133,7 +3133,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are managing an application that runs in Compute Engine. The application uses a custom HTTP server to expose an API that is accessed by other applications through an internal TCP/UDP load balancer. A firewall rule allows access to the API port from 0.0.0.0/0. You need to configure Cloud Logging to log each IP address that accesses the API by using the fewest number of steps. What should you do first?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Enable Packet Mirroring on the VPC.
 
@@ -3164,7 +3164,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs an ecommerce website built with JVM-based applications and microservice architecture in Google Kubernetes Engine (GKE). The application load increases during the day and decreases during the night. Your operations team has configured the application to run enough Pods to handle the evening peak load. You want to automate scaling by only running enough Pods and nodes for the load. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Configure the Vertical Pod Autoscaler, but keep the node pool size static.
 
@@ -3195,7 +3195,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization wants to increase the availability target of an application from 99.9% to 99.99% for an investment of $2,000. The application's current revenue is $1,000,000. You need to determine whether the increase in availability is worth the investment for a single year of usage. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Calculate the value of improved availability to be $900, and determine that the increase in availability is not worth the investment.
 
@@ -3226,7 +3226,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 A third-party application needs to have a service account key to work properly. When you try to export the key from your cloud project, you receive an error: “The organization policy constraint iam.disableServiceAccounKeyCreation is enforced.” You need to make the third-party application work while following Google-recommended security practices.What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Enable the default service account key, and download the key.
 
@@ -3257,7 +3257,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team is writing a postmortem after an incident on your external facing application. Your team wants to improve the postmortem policy to include triggers that indicate whether an incident requires a postmortem. Based on Site Reliability Engineering (SRE) practices, what triggers should be defined in the postmortem policy? (Choose two.)
-Suggested Answer: BE 🗳️
+Suggested Answer: BE 
 
 A. An external stakeholder asks for a postmortem
 
@@ -3290,7 +3290,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are implementing a CI/CD pipeline for your application in your company’s multi-cloud environment. Your application is deployed by using custom Compute Engine images and the equivalent in other cloud providers. You need to implement a solution that will enable you to build and deploy the images to your current environment and is adaptable to future changes. Which solution stack should you use?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Cloud Build with Packer
 
@@ -3321,7 +3321,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your application's performance in Google Cloud has degraded since the last release. You suspect that downstream dependencies might be causing some requests to take longer to complete. You need to investigate the issue with your application to determine the cause. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Configure Error Reporting in your application.
 
@@ -3352,7 +3352,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are creating a CI/CD pipeline in Cloud Build to build an application container image. The application code is stored in GitHub. Your company requires that production image builds are only run against the main branch and that the change control team approves all pushes to the main branch. You want the image build to be as automated as possible. What should you do? (Choose two.)
-Suggested Answer: CD 🗳️
+Suggested Answer: CD 
 
 A. Create a trigger on the Cloud Build job. Set the repository event setting to ‘Pull request’.
 
@@ -3385,7 +3385,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You built a serverless application by using Cloud Run and deployed the application to your production environment. You want to identify the resource utilization of the application for cost optimization. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Use Cloud Trace with distributed tracing to monitor the resource utilization of the application.
 
@@ -3416,7 +3416,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company is using HTTPS requests to trigger a public Cloud Run-hosted service accessible at the https://booking-engine-abcdef.a.run.app URL. You need to give developers the ability to test the latest revisions of the service before the service is exposed to customers. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Run the gcloud run deploy booking-engine --no-traffic --tag dev command. Use the https://dev--booking-engine-abcdef.a.run.app URL for testing.
 
@@ -3447,7 +3447,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are configuring connectivity across Google Kubernetes Engine (GKE) clusters in different VPCs. You notice that the nodes in Cluster A are unable to access the nodes in Cluster B. You suspect that the workload access issue is due to the network configuration. You need to troubleshoot the issue but do not have execute access to workloads and nodes. You want to identify the layer at which the network connectivity is broken. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Install a toolbox container on the node in Cluster Confirm that the routes to Cluster B are configured appropriately.
 
@@ -3478,7 +3478,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You manage an application that runs in Google Kubernetes Engine (GKE) and uses the blue/green deployment methodology. Extracts of the Kubernetes manifests are shown below:The Deployment app-green was updated to use the new version of the application. During post-deployment monitoring, you notice that the majority of user requests are failing. You did not observe this behavior in the testing environment. You need to mitigate the incident impact on users and enable the developers to troubleshoot the issue. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Update the Deployment app-blue to use the new version of the application.
 
@@ -3509,7 +3509,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are running a web application deployed to a Compute Engine managed instance group. Ops Agent is installed on all instances. You recently noticed suspicious activity from a specific IP address. You need to configure Cloud Monitoring to view the number of requests from that specific IP address with minimal operational overhead. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Configure the Ops Agent with a logging receiver. Create a logs-based metric.B Create a script to scrape the web server log. Export the IP address request metrics to the Cloud Monitoring API.
 
@@ -3538,7 +3538,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization is using Helm to package containerized applications. Your applications reference both public and private charts. Your security team flagged that using a public Helm repository as a dependency is a risk. You want to manage all charts uniformly, with native access control and VPC Service Controls. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Store public and private charts in OCI format by using Artifact Registry.
 
@@ -3569,7 +3569,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You use Terraform to manage an application deployed to a Google Cloud environment. The application runs on instances deployed by a managed instance group. The Terraform code is deployed by using a CI/CD pipeline. When you change the machine type on the instance template used by the managed instance group, the pipeline fails at the terraform apply stage with the following error message:You need to update the instance template and minimize disruption to the application and the number of pipeline runs.What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Delete the managed instance group, and recreate it after updating the instance template.
 
@@ -3600,7 +3600,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company operates in a highly regulated domain that requires you to store all organization logs for seven years. You want to minimize logging infrastructure complexity by using managed services. You need to avoid any future loss of log capture or stored logs due to misconfiguration or human error. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Use Cloud Logging to configure an aggregated sink at the organization level to export all logs into a BigQuery dataset.
 
@@ -3631,7 +3631,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are building the CI/CD pipeline for an application deployed to Google Kubernetes Engine (GKE). The application is deployed by using a Kubernetes Deployment, Service, and Ingress. The application team asked you to deploy the application by using the blue/green deployment methodology. You need to implement the rollback actions. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Run the kubectl rollout undo command.
 
@@ -3662,7 +3662,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are building and running client applications in Cloud Run and Cloud Functions. Your client requires that all logs must be available for one year so that the client can import the logs into their logging service. You must minimize required code changes. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Update all images in Cloud Run and all functions in Cloud Functions to send logs to both Cloud Logging and the client's logging service. Ensure that all the ports required to send logs are open in the VPC firewall.
 
@@ -3693,7 +3693,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are building and running client applications in Cloud Run and Cloud Functions. Your client requires that all logs must be available for one year so that the client can import the logs into their logging service. You must minimize required code changes. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Deploy Falco or Twistlock on GKE to monitor for vulnerabilities on your running Pods.
 
@@ -3724,7 +3724,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have an application that runs in Google Kubernetes Engine (GKE). The application consists of several microservices that are deployed to GKE by using Deployments and Services. One of the microservices is experiencing an issue where a Pod returns 403 errors after the Pod has been running for more than five hours. Your development team is working on a solution, but the issue will not be resolved for a month. You need to ensure continued operations until the microservice is fixed. You want to follow Google-recommended practices and use the fewest number of steps. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Create a cron job to terminate any Pods that have been running for more than five hours.
 
@@ -3755,7 +3755,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You want to share a Cloud Monitoring custom dashboard with a partner team. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Provide the partner team with the dashboard URL to enable the partner team to create a copy of the dashboard.
 
@@ -3786,7 +3786,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are building an application that runs on Cloud Run. The application needs to access a third-party API by using an API key. You need to determine a secure way to store and use the API key in your application by following Google-recommended practices. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Save the API key in Secret Manager as a secret. Reference the secret as an environment variable in the Cloud Run application.
 
@@ -3817,7 +3817,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are currently planning how to display Cloud Monitoring metrics for your organization’s Google Cloud projects. Your organization has three folders and six projects:You want to configure Cloud Monitoring dashboards to only display metrics from the projects within one folder. You need to ensure that the dashboards do not display metrics from projects in the other folders. You want to follow Google-recommended practices. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Create a single new scoping project.
 
@@ -3848,7 +3848,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company’s security team needs to have read-only access to Data Access audit logs in the \_Required bucket. You want to provide your security team with the necessary permissions following the principle of least privilege and Google-recommended practices. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Assign the roles/logging.viewer role to each member of the security team.
 
@@ -3879,7 +3879,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team is building a service that performs compute-heavy processing on batches of data. The data is processed faster based on the speed and number of CPUs on the machine. These batches of data vary in size and may arrive at any time from multiple third-party sources. You need to ensure that third parties are able to upload their data securely. You want to minimize costs, while ensuring that the data is processed as quickly as possible. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Provide a secure file transfer protocol (SFTP) server on a Compute Engine instance so that third parties can upload batches of data, and provide appropriate credentials to the server.Create a Cloud Function with a google.storage.object.finalize Cloud Storage trigger. Write code so that the function can scale up a Compute Engine autoscaling managed instance groupUse an image pre-loaded with the data processing software that terminates the instances when processing completes.
 
@@ -3910,7 +3910,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are reviewing your deployment pipeline in Google Cloud Deploy. You must reduce toil in the pipeline, and you want to minimize the amount of time it takes to complete an end-to-end deployment. What should you do? (Choose two.)
-Suggested Answer: BE 🗳️
+Suggested Answer: BE 
 
 A. Create a trigger to notify the required team to complete the next step when manual intervention is required.
 
@@ -3943,7 +3943,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You work for a global organization and are running a monolithic application on Compute Engine. You need to select the machine type for the application to use that optimizes CPU utilization by using the fewest number of steps. You want to use historical system metrics to identify the machine type for the application to use. You want to follow Google-recommended practices. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Use the Recommender API and apply the suggested recommendations.
 
@@ -3974,7 +3974,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You deployed an application into a large Standard Google Kubernetes Engine (GKE) cluster. The application is stateless and multiple pods run at the same time. Your application receives inconsistent traffic. You need to ensure that the user experience remains consistent regardless of changes in traffic and that the resource usage of the cluster is optimized.What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Configure a cron job to scale the deployment on a schedule
 
@@ -4005,7 +4005,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to deploy a new service to production. The service needs to automatically scale using a managed instance group and should be deployed across multiple regions. The service needs a large number of resources for each instance and you need to plan for capacity. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Monitor results of Cloud Trace to determine the optimal sizing.
 
@@ -4036,7 +4036,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are analyzing Java applications in production. All applications have Cloud Profiler and Cloud Trace installed and configured by default. You want to determine which applications need performance tuning. What should you do? (Choose two.)
-Suggested Answer: DE 🗳️
+Suggested Answer: DE 
 
 A. Examine the wall-clock time and the CPU time of the application. If the difference is substantial increase the CPU resource allocation.
 
@@ -4069,7 +4069,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization stores all application logs from multiple Google Cloud projects in a central Cloud Logging project. Your security team wants to enforce a rule that each project team can only view their respective logs and only the operations team can view all the logs. You need to design a solution that meets the security team s requirements while minimizing costs. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Grant each project team access to the project \_Default view in the central logging project. Grant togging viewer access to the operations team in the central logging project.
 
@@ -4100,7 +4100,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company uses Jenkins running on Google Cloud VM instances for CI/CD. You need to extend the functionality to use infrastructure as code automation by using Terraform. You must ensure that the Terraform Jenkins instance is authorized to create Google Cloud resources. You want to follow Google-recommended practices. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Confirm that the Jenkins VM instance has an attached service account with the appropriate Identity and Access Management (IAM) permissions.
 
@@ -4131,7 +4131,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You encounter a large number of outages in the production systems you support. You receive alerts for all the outages, the alerts are due to unhealthy systems that are automatically restarted within a minute. You want to set up a process that would prevent staff burnout while following Site Reliability Engineering (SRE) practices. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Eliminate alerts that are not actionable
 
@@ -4162,7 +4162,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 As part of your company's initiative to shift left on security, the InfoSec team is asking all teams to implement guard rails on all the Google Kubernetes Engine (GKE) clusters to only allow the deployment of trusted and approved images. You need to determine how to satisfy the InfoSec team's goal of shifting left on security. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Enable Container Analysis in Artifact Registry, and check for common vulnerabilities and exposures (CVEs) in your container images
 
@@ -4193,7 +4193,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company operates in a highly regulated domain. Your security team requires that only trusted container images can be deployed to Google Kubernetes Engine (GKE). You need to implement a solution that meets the requirements of the security team while minimizing management overhead. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Configure Binary Authorization in your GKE clusters to enforce deploy-time security policies.
 
@@ -4224,7 +4224,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your CTO has asked you to implement a postmortem policy on every incident for internal use. You want to define what a good postmortem is to ensure that the policy is successful at your company. What should you do? (Choose two.)
-Suggested Answer: CE 🗳️
+Suggested Answer: CE 
 
 A. Ensure that all postmortems include what caused the incident, identify the person or team responsible for causing the incident, and how to prevent a future occurrence of the incident.
 
@@ -4257,7 +4257,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are developing reusable infrastructure as code modules. Each module contains integration tests that launch the module in a test project. You are using GitHub for source control. You need to continuously test your feature branch and ensure that all code is tested before changes are accepted. You need to implement a solution to automate the integration tests. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Use a Jenkins server for CI/CD pipelines. Periodically run all tests in the feature branch.
 
@@ -4288,7 +4288,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company processes IoT data at scale by using Pub/Sub, App Engine standard environment, and an application written in Go. You noticed that the performance inconsistently degrades at peak load. You could not reproduce this issue on your workstation. You need to continuously monitor the application in production to identify slow paths in the code. You want to minimize performance impact and management overhead. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Use Cloud Monitoring to assess the App Engine CPU utilization metric.
 
@@ -4319,7 +4319,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs services by using Google Kubernetes Engine (GKE). The GKE dusters in the development environment run applications with verbose logging enabled. Developers view logs by using the kubectl logs command and do not use Cloud Logging. Applications do not have a uniform logging structure defined. You need to minimize the costs associated with application logging while still collecting GKE operational logs. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Run the gcloud container clusters update --logging=SYSTEM command for the development cluster.
 
@@ -4350,7 +4350,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have deployed a fleet of Compute Engine instances in Google Cloud. You need to ensure that monitoring metrics and logs for the instances are visible in Cloud Logging and Cloud Monitoring by your company's operations and cyber security teams. You need to grant the required roles for the Compute Engine service account by using Identity and Access Management (IAM) while following the principle of least privilege. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Grant the logging.logWriter and monitoring.metricWriter roles to the Compute Engine service accounts.
 
@@ -4381,7 +4381,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are the Site Reliability Engineer responsible for managing your company's data services and products. You regularly navigate operational challenges, such as unpredictable data volume and high cost, with your company's data ingestion processes. You recently learned that a new data ingestion product will be developed in Google Cloud. You need to collaborate with the product development team to provide operational input on the new product. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Deploy the prototype product in a test environment, run a load test, and share the results with the product development team.
 
@@ -4412,7 +4412,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are investigating issues in your production application that runs on Google Kubernetes Engine (GKE). You determined that the source of the issue is a recently updated container image, although the exact change in code was not identified. The deployment is currently pointing to the latest tag. You need to update your cluster to run a version of the container that functions as intended. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Create a new tag called stable that points to the previously working container, and change the deployment to point to the new tag.
 
@@ -4443,7 +4443,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to create a Cloud Monitoring SLO for a service that will be published soon. You want to verify that requests to the service will be addressed in fewer than 300 ms at least 90% of the time per calendar month. You need to identify the metric and evaluation method to use. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Select a latency metric for a request-based method of evaluation.
 
@@ -4474,7 +4474,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have an application that runs on Cloud Run. You want to use live production traffic to test a new version of the application, while you let the quality assurance team perform manual testing. You want to limit the potential impact of any issues while testing the new version, and you must be able to roll back to a previous version of the application if needed. How should you deploy the new version? (Choose two.)
-Suggested Answer: BD 🗳️
+Suggested Answer: BD 
 
 A. Deploy the application as a new Cloud Run service.
 
@@ -4507,7 +4507,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You recently noticed that one of your services has exceeded the error budget for the current rolling window period. Your company's product team is about to launch a new feature. You want to follow Site Reliability Engineering (SRE) practices. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Notify the team about the lack of error budget and ensure that all their tests are successful so the launch will not further risk the error budget
 
@@ -4538,7 +4538,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to introduce postmortems into your organization. You want to ensure that the postmortem process is well received. What should you do? (Choose two.)
-Suggested Answer: CD 🗳️
+Suggested Answer: CD 
 
 A. Encourage new employees to conduct postmortems to team through practice.
 
@@ -4571,7 +4571,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to enforce several constraint templates across your Google Kubernetes Engine (GKE) clusters. The constraints include policy parameters, such as restricting the Kubernetes API. You must ensure that the policy parameters are stored in a GitHub repository and automatically applied when changes occur. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Set up a GitHub action to trigger Cloud Build when there is a parameter change. In Cloud Build, run a gcloud CLI command to apply the change.
 
@@ -4602,7 +4602,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are the Operations Lead for an ongoing incident with one of your services. The service usually runs at around 70% capacity. You notice that one node is returning 5xx errors for all requests. There has also been a noticeable increase in support cases from customers. You need to remove the offending node from the load balancer pool so that you can isolate and investigate the node. You want to follow Google-recommended practices to manage the incident and reduce the impact on users. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. 1. Communicate your intent to the incident team.2. Perform a load analysis to determine if the remaining nodes can handle the increase in traffic offloaded from the removed node, and scale appropriately.3. When any new nodes report healthy, drain traffic from the unhealthy node, and remove the unhealthy node from service.
 
@@ -4633,7 +4633,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are configuring your CI/CD pipeline natively on Google Cloud. You want builds in a pre-production Google Kubernetes Engine (GKE) environment to be automatically load-tested before being promoted to the production GKE environment. You need to ensure that only builds that have passed this test are deployed to production. You want to follow Google-recommended practices. How should you configure this pipeline with Binary Authorization?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Create an attestation for the builds that pass the load test by requiring the lead quality assurance engineer to sign the attestation by using their personal private key.
 
@@ -4664,7 +4664,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are deploying an application to Cloud Run. The application requires a password to start. Your organization requires that all passwords are rotated every 24 hours, and your application must have the latest password. You need to deploy the application with no downtime. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Store the password in Secret Manager and send the secret to the application by using environment variables.
 
@@ -4695,7 +4695,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs applications in Google Kubernetes Engine (GKE) that are deployed following a GitOps methodology. Application developers frequently create cloud resources to support their applications. You want to give developers the ability to manage infrastructure as code, while ensuring that you follow Google-recommended practices. You need to ensure that infrastructure as code reconciles periodically to avoid configuration drift. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Install and configure Config Connector in Google Kubernetes Engine (GKE).
 
@@ -4726,7 +4726,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are designing a system with three different environments: development, quality assurance (QA), and production. Each environment will be deployed with Terraform and has a Google Kubernetes Engine (GKE) cluster created so that application teams can deploy their applications. Anthos Config Management will be used and templated to deploy infrastructure level resources in each GKE cluster. All users (for example, infrastructure operators and application owners) will use GitOps. How should you structure your source control repositories for both Infrastructure as Code (IaC) and application code?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. • Cloud Infrastructure (Terraform) repository is shared: different directories are different environments• GKE Infrastructure (Anthos Config Management Kustomize manifests) repository is shared: different overlay directories are different environments• Application (app source code) repositories are separated: different branches are different features
 
@@ -4757,7 +4757,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are configuring Cloud Logging for a new application that runs on a Compute Engine instance with a public IP address. A user-managed service account is attached to the instance. You confirmed that the necessary agents are running on the instance but you cannot see any log entries from the instance in Cloud Logging. You want to resolve the issue by following Google-recommended practices. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Export the service account key and configure the agents to use the key.
 
@@ -4788,7 +4788,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 As a Site Reliability Engineer, you support an application written in Go that runs on Google Kubernetes Engine (GKE) in production. After releasing a new version of the application, you notice the application runs for about 15 minutes and then restarts. You decide to add Cloud Profiler to your application and now notice that the heap usage grows constantly until the application restarts. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Increase the CPU limit in the application deployment.
 
@@ -4819,7 +4819,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are deploying a Cloud Build job that deploys Terraform code when a Git branch is updated. While testing, you noticed that the job fails. You see the following error in the build logs:Initializing the backend...Error: Failed to get existing workspaces: querying Cloud Storage failed: googleapi: Error 403You need to resolve the issue by following Google-recommended practices. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Change the Terraform code to use local state.
 
@@ -4850,7 +4850,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs applications in Google Kubernetes Engine (GKE). Several applications rely on ephemeral volumes. You noticed some applications were unstable due to the DiskPressure node condition on the worker nodes. You need to identify which Pods are causing the issue, but you do not have execute access to workloads and nodes. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Check the node/ephemeral_storage/used_bytes metric by using Metrics Explorer.
 
@@ -4881,7 +4881,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are designing a new Google Cloud organization for a client. Your client is concerned with the risks associated with long-lived credentials created in Google Cloud. You need to design a solution to completely eliminate the risks associated with the use of JSON service account keys while minimizing operational overhead. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Apply the constraints/iam.disableServiceAccountKevCreation constraint to the organization.
 
@@ -4912,7 +4912,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are designing a deployment technique for your applications on Google Cloud. As part of your deployment planning, you want to use live traffic to gather performance metrics for new versions of your applications. You need to test against the full production load before your applications are launched. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Use A/B testing with blue/green deployment.
 
@@ -4943,7 +4943,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your Cloud Run application writes unstructured logs as text strings to Cloud Logging. You want to convert the unstructured logs to JSON-based structured logs. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Modify the application to use Cloud Logging software development kit (SDK), and send log entries with a jsonPayload field.
 
@@ -4974,7 +4974,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company is planning a large marketing event for an online retailer during the holiday shopping season. You are expecting your web application to receive a large volume of traffic in a short period. You need to prepare your application for potential failures during the event. What should you do? (Choose two.)
-Suggested Answer: BC 🗳️
+Suggested Answer: BC 
 
 A. Configure Anthos Service Mesh on the application to identify issues on the topology map.
 
@@ -5007,7 +5007,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company recently migrated to Google Cloud. You need to design a fast, reliable, and repeatable solution for your company to provision new projects and basic resources in Google Cloud. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Use the Google Cloud console to create projects.
 
@@ -5038,7 +5038,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are configuring a CI pipeline. The build step for your CI pipeline integration testing requires access to APIs inside your private VPC network. Your security team requires that you do not expose API traffic publicly. You need to implement a solution that minimizes management overhead. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Use Cloud Build private pools to connect to the private VPC.
 
@@ -5069,7 +5069,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are leading a DevOps project for your organization. The DevOps team is responsible for managing the service infrastructure and being on-call for incidents. The Software Development team is responsible for writing, submitting, and reviewing code. Neither team has any published SLOs. You want to design a new joint-ownership model for a service between the DevOps team and the Software Development team. Which responsibilities should be assigned to each team in the new joint-ownership model?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A.
 
@@ -5100,7 +5100,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You recently migrated an ecommerce application to Google Cloud. You now need to prepare the application for the upcoming peak traffic season. You want to follow Google-recommended practices. What should you do first to prepare for the busy season?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Migrate the application to Cloud Run, and use autoscaling.
 
@@ -5131,7 +5131,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are monitoring a service that uses n2-standard-2 Compute Engine instances that serve large files. Users have reported that downloads are slow. Your Cloud Monitoring dashboard shows that your VMs are running at peak network throughput. You want to improve the network throughput performance. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Add additional network interface controllers (NICs) to your VMs.
 
@@ -5162,7 +5162,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization is starting to containerize with Google Cloud. You need a fully managed storage solution for container images and Helm charts. You need to identify a storage solution that has native integration into existing Google Cloud services, including Google Kubernetes Engine (GKE), Cloud Run, VPC Service Controls, and Identity and Access Management (IAM). What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Use Docker to configure a Cloud Storage driver pointed at the bucket owned by your organization.
 
@@ -5193,7 +5193,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You need to define SLOs for a high-traffic web application. Customers are currently happy with the application performance and availability. Based on current measurement, the 90th percentile of latency is 160 ms and the 95th percentile of latency is 300 ms over a 28-day window. What latency SLO should you publish?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. 90th percentile - 150 ms95th percentile - 290 ms
 
@@ -5224,7 +5224,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs applications in Google Kubernetes Engine (GKE). Application developers frequently create cloud resources to support their applications. You need to give developers the ability to manage infrastructure as code while adhering to Google-recommended practices. You want to manage infrastructure as code through Kubernetes Custom Resource Definitions (CRDs) and ensure that your chosen setup can be supported by the Google Cloud Support Portal. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Configure Cloud Build with a Terraform builder to execute the terraform plan and terraform apply commands.
 
@@ -5255,7 +5255,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs services on Google Cloud. Each team runs their applications in a dedicated project. New teams and projects are created regularly. Your security team requires that all logs are processed by a security information and event management (SIEM) system. The SIEM ingests logs by using Pub/Sub. You must ensure that all existing and future logs are scanned by the SIEM. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Create an organization-level aggregated sink with a siem log bucket as the destination. Set an inclusion filter to include all logs.
 
@@ -5286,7 +5286,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company allows teams to self-manage Google Cloud projects, including project-level Identity and Access Management (IAM). You are concerned that the team responsible for the Shared VPC project might accidentally delete the project, so a lien has been placed on the project. You need to design a solution to restrict Shared VPC project deletion to those with the resourcemanager.projects.updateLiens permission at the organization level. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Instruct teams to only perform IAM permission management as code with Terraform.
 
@@ -5317,7 +5317,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company runs an ecommerce business. The application responsible for payment processing has structured JSON logging with the following schema:Capture and access of logs from the payment processing application is mandatory for operations, but the jsonPayload.user_email field contains personally identifiable information (PII). Your security team does not want the entire engineering team to have access to PII. You need to stop exposing PII to the engineering team and restrict access to security team members only. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Apply the conditional role binding resource.name.extract("locations/global/buckets/{bucket}/") == "\_Default" to the \_Default bucket.
 
@@ -5348,7 +5348,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your organization is running multiple Google Kubernetes Engine (GKE) clusters in a project. You need to design a highly-available solution to collect and query both domain-specific workload metrics and GKE default metrics across all clusters, while minimizing operational overhead. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Use Prometheus operator to install Prometheus in every cluster and scrape the metrics. Configure remote-write to one central Prometheus. Query the central Prometheus instance.
 
@@ -5379,7 +5379,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company stores a large volume of infrequently used data in Cloud Storage. The projects in your company's CustomerService folder access Cloud Storage frequently, but store very little data. You want to enable Data Access audit logging across the company to identify data usage patterns. You need to exclude the CustomerService folder projects from Data Access audit logging. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Enable Data Access audit logging for Cloud Storage at the organization level, and configure exempted principals to include users of the CustomerService folder.
 
@@ -5410,7 +5410,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You have an application running in production on Cloud Run. Your team recently finished developing a new version (revision B) of the application. You want to test the new revision on 10% of your clients by using the least amount of effort. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Deploy the new revision to the existing service without traffic allocated. Tag the revision and share the URL with 10% of your clients.
 
@@ -5441,7 +5441,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are designing a new multi-tenant Google Kubernetes Engine (GKE) cluster for a customer. Your customer is concerned with the risks associated with long-lived credentials use. The customer requires that each GKE workload has the minimum Identity and Access Management (IAM) permissions set following the principle of least privilege (PoLP). You need to design an IAM impersonation solution while following Google-recommended practices. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. 1. Create a Google service account.2. Create a node pool, and set the Google service account as the default identity.3. Ensure that workloads can only run on the designated node pool by using node selectors, taints, and tolerations.4. Repeat for each workload.
 
@@ -5472,7 +5472,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are configuring a Cl pipeline in Cloud Build When you test the pipeline, the following cloudbuild.yaml definition results in 5 minutes each on the foo step and bar stepThe foo step and bar step are independent of each other. The baz step needs both the foo and bar steps to be completed before starting. You want to use parallelism to reduce build times What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Modify the build script to add -options:machineType: 'E2_HIGHCPU_8'
 
@@ -5503,7 +5503,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You receive a Cloud Monitoring alert indicating potential malicious activity on a node in your Google Kubernetes Engine (GKE) cluster. The alert suggests a possible compromised container running on that node. You need to isolate this node to prevent further compromise while investigating the issue. You also want to minimize disruption to applications running on the cluster. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Taint the suspicious node to prevent Pods that have interacted with it from being scheduled on other nodes in the cluster
 
@@ -5534,7 +5534,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company has an application deployed on Google Kubernetes Engine (GKE) consisting of 12 microservices. Multiple teams are working concurrently on various features across three envi-ronments: Dev, Staging, and Prod. Developers report dependency test failures and delayed re-leases due to deployments from multiple feature branches in the shared Dev GKE cluster.You need to implement a cost-effective solution for developers to test their microservice features in a stable development environment isolated from other development activities. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Automate CI pipelines by using Cloud Build for container image creation and Kubernetes manifest updates from main branch merge requests. Integrate with Config Sync to test new im-ages in dynamically created namespaces on the Dev GKE cluster with autoscaling enabled. Im-plement a post-test namespace cleanup routine.
 
@@ -5565,7 +5565,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are troubleshooting a failed deployment in your CI/CD pipeline. The deployment logs indicate that the application container failed to start due to a missing environment variable. You need to identify the root cause and implement a solution within your CI/CD workflow to prevent this issue from recurring. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Use a canary deployment strategy.
 
@@ -5596,7 +5596,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You work for a company that offers a free photo processing application. You are designing the infrastructure for the backend service that processes the photos. The service:• Uses Cloud Storage to store both unprocessed and processed photos.• Can resume processing photos in the event of a failure.• Is not suitable for containerization.There is no SLO for the time taken to process a photo. You need to choose the most cost-effective solution for running the service. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Deploy the service by using Cloud Run.
 
@@ -5627,7 +5627,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You manage a critical API running on Cloud Run that serves an average of 10,000 requests per minute. You need to define service level objectives (SLOs) for availability and latency to ensure that the API meets user expectations, which include 99.9% availability and a maximum latency of 200 milliseconds for 95% of requests. You also need to ensure these SLOs are actively monitored and measured. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Configure Cloud Monitoring to send alerts when average API latency exceeds 150 ms or the error rate surpasses 0.1%.
 
@@ -5658,7 +5658,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are running a web application that connects to an AlloyDB cluster by using a private IP address in your default VPC. You need to run a database schema migration in your CI/CD pipeline by using Cloud Build before deploying a new version of your application. You want to follow Google-recommended security practices. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Set up a Cloud Build private pool to access the database through a static external IP address. Configure the database to only allow connections from this IP address. Execute the schema migration script in the private pool.
 
@@ -5689,7 +5689,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You use Artifact Registry to store container images built with Cloud Build. You need to ensure that all existing and new images are continuously scanned for vulnerabilities. You also want to track who pushed each image to the registry. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Configure Artifact Registry to automatically scan new images and periodically re-scan all images. Use Cloud Audit Logs to track image uploads and identify the user who pushed each image.
 
@@ -5720,7 +5720,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You manage a retail website for your company. The website consists of several microservices running in a GKE Standard node pool with node autoscaling enabled. Each microservice has resource limits and a Horizontal Pod Autoscaler configured. During a busy period, you receive alerts for one of the microservices. When you check the Pods, half of them have the status OOMKilled, and the number of Pods is at the minimum autoscaling limit. You need to resolve the issue. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Update the node pool to use a machine type with more memory.
 
@@ -5751,7 +5751,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are configuring a Cl pipeline. The build step for your Cl pipeline integration testing requires access to APIs inside your private VPC network. Your security team requires that you do not expose API traffic publicly. You need to implement a solution that minimizes management overhead. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Use Cloud Build private pools to connect to the private VPC.
 
@@ -5782,7 +5782,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are deploying a new version of your application to a multi-zone Google Kubernetes Engine (GKE) cluster. The deployment is progressing smoothly, but you notice that some Pods in a specific zone are experiencing higher error rates. You need to selectively roll back the update for the Pods experiencing errors with minimal impact to users. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Scale down the Pods in the affected zone. Redeploy the new version of the application.
 
@@ -5813,7 +5813,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You work for a healthcare company and regulations require you to create all resources in a United States-based region. You attempted to create a secret in Secret Manager but received the following error message:Constraint constraints/gcp.resourceLocations violated for [orgpolicy:projects/000000] attempting to create a secret in [global]You need to resolve the error while remaining compliant with regulations. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Remove the organization policy referenced in the error message.
 
@@ -5844,7 +5844,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are responsible for creating development environments for your company's development team. You want to create environments with identical IDEs for all developers while ensuring that these environments are not exposed to public networks. You need to choose the most cost-effective solution without impacting developer productivity. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create multiple Compute Engine VM instances with a public IP address and use a Public NAT gateway. Configure an instance schedule to shut down the VMs.
 
@@ -5875,7 +5875,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company uses Cloud Deploy with multiple delivery pipelines for deploying applications to different environments. Your development team currently lacks access to any of these pipelines. You need to grant the team access to only the development delivery pipeline, while following Google-recommended practices. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. In the Google Cloud console, grant the development team the roles/clouddeploy.operator role. Add deny conditions to all pipelines other than the development delivery pipeline.
 
@@ -5906,7 +5906,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company has recently experienced several production service issues. You need to create a Cloud Monitoring dashboard to troubleshoot the issues, and you want to use the dashboard to distinguish between failures in your own service and those caused by a Google Cloud service that you use. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create a log-based metric to track cloud service errors, and display the metric on the dashboard.
 
@@ -5937,7 +5937,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your company wants to implement a CD pipeline in Cloud Deploy for a web service deployed to GKE. The web service currently does not have any automated testing. The Quality Assurance team must manually verify any new releases of the web service before any production traffic is processed. You need to design the CD pipeline. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Create a single pipeline stage, and use a standard deployment strategy.
 
@@ -5968,7 +5968,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You manage your company’s primary revenue-generating application. You have an error budget policy in place that freezes production deployments when the application is close to breaching its SLO. A number of issues have recently occurred, and the application has exhausted its error budget. You need to deploy a new release to the application that includes a feature urgently required by your largest customer. You have been told that the release has passed all unit tests. What should you do?
-Suggested Answer: A 🗳️
+Suggested Answer: A 
 
 A. Delay the deployment of the feature until the error budget is replenished.
 
@@ -5999,7 +5999,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You work for a company that manages highly sensitive user data. You are designing the Google Kubernetes Engine (GKE) infrastructure for your company, including several applications that will be deployed in development and production environments. Your design must protect data from unauthorized access from other applications, while minimizing the amount of management overhead required. What should you do?
-Suggested Answer: C 🗳️
+Suggested Answer: C 
 
 A. Create one cluster for the organization with separate namespaces for each application and environment combination.
 
@@ -6030,7 +6030,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are developing a Node.js utility on a workstation in Cloud Workstations by using Code OSS. The utility is a simple web page, and you have already confirmed that all necessary firewall rules are in place. You tested the application by starting it on port 3000 on your workstation in Cloud Workstations, but you need to be able to access the web page from your local machine. You need to follow Google-recommended security practices. What should you do?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. Use a browser running on a bastion host VM.
 
@@ -6061,7 +6061,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 Your team is preparing to launch a new API in Cloud Run. The API uses an OpenTelemetry agent to send distributed tracing data to Cloud Trace to monitor the time each request takes. The team has noticed inconsistent trace collection. You need to resolve the issue. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Use an HTTP health check.
 
@@ -6092,7 +6092,7 @@ Topic #: 1
 [All Professional Cloud DevOps Engineer Questions]
 
 You are deploying a new application on Google Kubernetes Engine (GKE) that processes personally identifiable information (PII). You need to configure Cloud Logging to collect logs from your application while ensuring that sensitive user information is not exposed. What should you do?
-Suggested Answer: B 🗳️
+Suggested Answer: B 
 
 A. Implement log sampling to reduce the volume of logs collected.
 

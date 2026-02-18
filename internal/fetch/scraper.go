@@ -1,11 +1,10 @@
 package fetch
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-	"sort"
-	"strconv"
+	"html"
+	"net/url"
+	"regexp"
 	"strings"
 	"sync"
 
@@ -20,7 +19,7 @@ import (
 func getDataFromLink(link string) *models.QuestionData {
 	doc, err := ParseHTML(link, *client)
 	if err != nil {
-		log.Printf("Failed parsing HTML data from link: %v", err)
+		debugf("failed parsing HTML data from link: %v", err)
 		return nil
 	}
 
@@ -29,99 +28,158 @@ func getDataFromLink(link string) *models.QuestionData {
 		allQuestions = append(allQuestions, utils.CleanText(s.Text()))
 	})
 
-	answerText := strings.TrimSpace(doc.Find(".correct-answer").Text())
-	answer := ""
-	if len(answerText) > 0 {
-		answer = string(strings.ReplaceAll(strings.ReplaceAll(answerText, " ", ""), "\n", "")[0])
-	}
+	answer := strings.TrimSpace(doc.Find(".correct-answer").Text())
 
 	return &models.QuestionData{
 		Title:        utils.CleanText(doc.Find("h1").Text()),
 		Header:       strings.ReplaceAll(strings.TrimSpace(doc.Find(".question-discussion-header").Text()), "\t", ""),
 		Content:      utils.CleanText(doc.Find(".card-text").Text()),
+		ExhibitURLs:  extractExhibitImageURLs(doc),
 		Questions:    allQuestions,
 		Answer:       answer,
 		Timestamp:    utils.CleanText(doc.Find(".discussion-meta-data > i").Text()),
 		QuestionLink: link,
-		Comments:     utils.CleanText(doc.Find(".discussion-container").Text()),
+		Comments:     extractDiscussionComments(doc),
 	}
 }
 
-var counter int = 0 //start counter at 1
-func getJSONFromLink(link string) []*models.QuestionData {
-	initialResp := FetchURL(link, *client)
+func extractExhibitImageURLs(doc *goquery.Document) []string {
+	var urls []string
+	seen := map[string]struct{}{}
 
-	var githubResp map[string]any
-	err := json.Unmarshal(initialResp, &githubResp)
+	add := func(raw string) {
+		normalized := normalizeExhibitURL(raw)
+		if normalized == "" {
+			return
+		}
+		if _, exists := seen[normalized]; exists {
+			return
+		}
+		seen[normalized] = struct{}{}
+		urls = append(urls, normalized)
+	}
+
+	doc.Find(".card-text img").Each(func(i int, s *goquery.Selection) {
+		if src, ok := s.Attr("src"); ok {
+			add(src)
+		}
+		if src, ok := s.Attr("data-src"); ok {
+			add(src)
+		}
+		if src, ok := s.Attr("data-original"); ok {
+			add(src)
+		}
+		if src, ok := s.Attr("data-lazy-src"); ok {
+			add(src)
+		}
+		if srcSet, ok := s.Attr("srcset"); ok {
+			add(firstURLFromSrcset(srcSet))
+		}
+	})
+
+	return urls
+}
+
+func normalizeExhibitURL(raw string) string {
+	raw = strings.TrimSpace(html.UnescapeString(raw))
+	if raw == "" || strings.HasPrefix(raw, "data:") {
+		return ""
+	}
+
+	if strings.HasPrefix(raw, "//") {
+		raw = "https:" + raw
+	} else if strings.HasPrefix(raw, "/") {
+		raw = "https://www.examtopics.com" + raw
+	}
+
+	u, err := url.Parse(raw)
 	if err != nil {
-		log.Printf("error unmarshalling GitHub API response: %v", err)
-		return nil
+		return ""
+	}
+	if u.Scheme != "http" && u.Scheme != "https" {
+		return ""
 	}
 
-	downloadURL, ok := githubResp["download_url"].(string)
-	if !ok {
-		log.Printf("couldn't find download_url in GitHub API response")
-		return nil
+	return u.String()
+}
+
+func firstURLFromSrcset(srcset string) string {
+	items := strings.Split(srcset, ",")
+	if len(items) == 0 {
+		return ""
 	}
 
-	jsonResp := FetchURL(downloadURL, *client)
-
-	var content models.JSONResponse
-	err = json.Unmarshal(jsonResp, &content)
-	if err != nil {
-		log.Printf("error unmarshalling the questions data: %v", err)
-		return nil
+	first := strings.TrimSpace(items[0])
+	if first == "" {
+		return ""
+	}
+	parts := strings.Fields(first)
+	if len(parts) == 0 {
+		return ""
 	}
 
-	fmt.Println("Processing content from:", downloadURL)
+	return parts[0]
+}
 
-	var questions []*models.QuestionData
+func extractDiscussionComments(doc *goquery.Document) []models.CommentData {
+	var comments []models.CommentData
+	answerLetterPattern := regexp.MustCompile(`\b([A-F])\b`)
 
-	if content.PageProps.Questions == nil {
-		log.Printf("no questions found in JSON content")
-		return nil
-	}
-
-	for _, q := range content.PageProps.Questions {
-		var comments string
-		for _, discussion := range q.Discussion {
-			comments += fmt.Sprintf("[%s] %s\n", discussion.Poster, discussion.Content)
+	doc.Find(".discussion-container .comment-container").Each(func(i int, s *goquery.Selection) {
+		user := strings.TrimSpace(s.Find(".comment-username").First().Text())
+		if user == "" {
+			user = "Anonymous"
 		}
 
-		var choicesHeader string
-		var keys []string
-		for key := range q.Choices {
-			keys = append(keys, key)
+		answer := ""
+		answerText := strings.TrimSpace(s.Find(".comment-selected-answers strong").First().Text())
+		if answerText == "" {
+			answerText = strings.TrimSpace(s.Find(".comment-selected-answers").First().Text())
 		}
-		sort.Strings(keys)
-		for _, key := range keys {
-			choicesHeader += fmt.Sprintf("**%s:** %s\n\n", key, q.Choices[key])
+		if m := answerLetterPattern.FindStringSubmatch(strings.ToUpper(answerText)); len(m) == 2 {
+			answer = m[1]
 		}
 
-		name := utils.GetNameFromLink(link)
-		counter++
+		content := normalizeCommentText(s.Find(".comment-content").First().Text())
+		if content == "" {
+			return
+		}
 
-		questions = append(questions, &models.QuestionData{
-			Title:        "Examtopics " + strings.ReplaceAll(name, ".json?ref=main", "") + " question #" + strconv.Itoa(counter),
-			Header:       q.QuestionText,
-			Content:      strings.Join(q.QuestionImages, "\n"),
-			Questions:    []string{choicesHeader},
-			Answer:       q.Answer,
-			Timestamp:    q.Timestamp,
-			QuestionLink: q.URL,
-			Comments:     utils.CleanText(comments),
+		comments = append(comments, models.CommentData{
+			User:   user,
+			Answer: answer,
+			Text:   content,
 		})
-	}
+	})
 
-	return questions
+	return comments
 }
 
-func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concurrency int) []string {
+func normalizeCommentText(raw string) string {
+	raw = strings.ReplaceAll(raw, "\r\n", "\n")
+	raw = strings.ReplaceAll(raw, "\r", "\n")
+	raw = strings.TrimSpace(raw)
+	if raw == "" {
+		return ""
+	}
+
+	lines := strings.Split(raw, "\n")
+	cleaned := make([]string, 0, len(lines))
+	for _, line := range lines {
+		trimmed := strings.TrimSpace(line)
+		if trimmed == "" {
+			continue
+		}
+		cleaned = append(cleaned, trimmed)
+	}
+
+	return strings.Join(cleaned, "\n")
+}
+
+func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concurrency int, onPageProcessed func()) []string {
 	var wg sync.WaitGroup
 	sem := make(chan struct{}, concurrency)
 	results := make(chan []string, numPages)
-	bar := pb.StartNew(numPages)
-	startTime := utils.StartTime()
 
 	rateLimiter := utils.CreateRateLimiter(constants.RequestsPerSecond)
 	defer rateLimiter.Stop()
@@ -137,7 +195,9 @@ func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concu
 
 			url := fmt.Sprintf("https://www.examtopics.com/discussions/%s/%d", providerName, i)
 			results <- getLinksFromPage(url, grepStr)
-			bar.Increment()
+			if onPageProcessed != nil {
+				onPageProcessed()
+			}
 		}(i)
 	}
 
@@ -152,8 +212,6 @@ func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concu
 		all = append(all, res...)
 	}
 
-	bar.Finish()
-	fmt.Printf("Scraping completed in %s.\n", utils.TimeSince(startTime))
 	return all
 }
 
@@ -161,20 +219,26 @@ func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concu
 func GetAllPages(providerName string, grepStr string) []models.QuestionData {
 	baseURL := fmt.Sprintf("https://www.examtopics.com/discussions/%s/", providerName)
 	numPages := getMaxNumPages(baseURL)
-	fmt.Printf("Fetching %d pages for provider '%s'\n", numPages, providerName)
+	startTime := utils.StartTime()
+	bar := pb.StartNew(numPages)
 
-	allLinks := fetchAllPageLinksConcurrently(providerName, grepStr, numPages, constants.MaxConcurrentRequests)
+	allLinks := fetchAllPageLinksConcurrently(providerName, grepStr, numPages, constants.MaxConcurrentRequests, func() {
+		bar.Increment()
+	})
 
 	unique := utils.DeduplicateLinks(allLinks)
 	sortedLinks := utils.SortLinksByQuestionNumber(unique)
+	bar.SetTotal(int64(numPages + len(sortedLinks)))
 
-	fmt.Printf("Found %d unique matching links:\n", len(sortedLinks))
+	if len(sortedLinks) == 0 {
+		bar.Finish()
+		fmt.Println("No matching questions were found.")
+		return nil
+	}
 
 	var wg sync.WaitGroup
 	sem := make(chan struct{}, constants.MaxConcurrentRequests)
 	results := make([]*models.QuestionData, len(sortedLinks))
-	startTime := utils.StartTime()
-	bar := pb.StartNew(len(sortedLinks))
 
 	rateLimiter := utils.CreateRateLimiter(constants.RequestsPerSecond)
 	defer rateLimiter.Stop()
@@ -208,7 +272,7 @@ func GetAllPages(providerName string, grepStr string) []models.QuestionData {
 		}
 	}
 
-	fmt.Printf("Scraping completed in %s.\n", utils.TimeSince(startTime))
+	fmt.Printf("Extraction complete in %s.\n", utils.TimeSince(startTime))
 
 	return finalData
 }

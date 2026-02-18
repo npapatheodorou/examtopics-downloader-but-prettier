@@ -4,181 +4,29 @@ This repo aims to make it possible for you to obtain all the exam questions from
 
 ## Setting it Up
 
-### Using docker
-
-1. Make sure [docker](https://docs.docker.com/engine/install/) is installed on your system.
-2. Pull the docker image:
-
-```bash
-docker pull ghcr.io/thatonecodes/examtopics-downloader:latest
-```
-
-3\. Run the container:
-
-```bash
-docker run -it \
-  --name examtopics-downloader \
-  ghcr.io/thatonecodes/examtopics-downloader:latest \
-  -p google -s devops \
-  -save-links -o output.md
-docker cp examtopics-downloader:/app/output.md .
-docker cp examtopics-downloader:/app/saved-links.txt .
-docker rm examtopics-downloader
-```
-
-> [!NOTE]  
-> If seeing `exec: format exec error` or warnings about unsuportted platforms, if you are on `linux/arm64`, modify the docker cmd to:
-
-```bash
-docker run -it \
-  --name examtopics-downloader \
-  --platform linux/arm64 \
-  ghcr.io/thatonecodes/examtopics-downloader:latest \
-  -p google -s devops \
-  -save-links -o output.md
-docker cp examtopics-downloader:/app/output.md .
-docker cp examtopics-downloader:/app/saved-links.txt .
-docker rm examtopics-downloader
-```
-
-### Using Dockerfile
-
-1. `git clone https://github.com/thatonecodes/examtopics-downloader` and make sure docker is installed on your system.
-2. Run `docker build -t examtopics-dl . && docker run --rm examtopics-dl -p google -s devops -save-links -o output.md`
-3. After setup, it will give you a list of exams with the `cisco` provider.
-
-### Building from Source
+### Running with Go
 
 1. First, you must install [Golang >= 1.24](https://go.dev/doc/install) from the offical website.
 2. Then, run `git clone https://github.com/thatonecodes/examtopics-downloader` in your terminal to clone the repo.
 3. `cd` into the directory: `cd examtopics-downloader`
-4. You can now run: `go run ./cmd/main.go -p cisco -exams`
+4. You can now run: `go run ./cmd/main.go`
 
 (there will be compiled binaries in the future)
 
-## Command Line Arguments
+## Interactive Flow
 
-```
-Each command line argument you can provide when running the program:
+There are no required startup parameters.
+Optional:
+- `-debug` enables verbose debug/error logs during fetch and extraction.
 
-  -c	Optionally include all the comment/discussion text
-  -exams
-    	Optionally show all the possible exams for your selected provider and exit
-  -no-cache
-    	Optional argument, set to disable looking through cached data on github
-  -o string
-    	Optional path of the file where the data will be outputted (default "examtopics_output.md")
-  -p string
-    	Name of the exam provider (default -> google) (default "google")
-  -s string
-    	String to grep for in discussion links (required)
-  -save-links
-    	Optional argument to save unique links to questions
-  -t string
-    	Optional argument to make cached requests faster to gh api
-  -type string
-    	Optionally include file type (default -> .md) (default "md")
-```
+When the app starts it will:
+1. scrape and display all available providers
+2. ask you to select a provider
+3. scrape and display all available exams for that provider
+4. ask you to select an exam
+5. run extraction with a single progress bar for the whole extraction workflow
 
-## Possible Arguments List
-
-### Exam Providers, `-p`
-
-| Provider (-p)    | View Exams                                                                     | Notes     |
-| ---------------- | ------------------------------------------------------------------------------ | --------- |
-| amazon           | [Amazon Exams](https://www.examtopics.com/exams/amazon/)                       | AWS Certs |
-| cisco            | [Cisco Exams](https://www.examtopics.com/exams/cisco/)                         |           |
-| comptia          | [CompTIA Exams](https://www.examtopics.com/exams/comptia/)                     |           |
-| salesforce       | [Salesforce Exams](https://www.examtopics.com/exams/salesforce/)               |           |
-| fortinet         | [Fortinet Exams](https://www.examtopics.com/exams/fortinet/)                   |           |
-| juniper          | [Juniper Exams](https://www.examtopics.com/exams/juniper/)                     |           |
-| isaca            | [ISACA Exams](https://www.examtopics.com/exams/isaca/)                         |           |
-| vmware           | [VMware Exams](https://www.examtopics.com/exams/vmware/)                       |           |
-| isc2             | [ISC2 Exams](https://www.examtopics.com/exams/isc2/)                           | CISSP etc |
-| servicenow       | [ServiceNow Exams](https://www.examtopics.com/exams/servicenow/)               |           |
-| google           | [Google Exams](https://www.examtopics.com/exams/google/)                       |           |
-| microsoft        | [Microsoft Exams](https://www.examtopics.com/exams/microsoft/)                 |           |
-| ec-council       | [EC-Council Exams](https://www.examtopics.com/exams/ec-council/)               | CEH etc   |
-| oracle           | [Oracle Exams](https://www.examtopics.com/exams/oracle/)                       |           |
-| paloaltonetworks | [Palo Alto Networks Exams](https://www.examtopics.com/exams/paloaltonetworks/) |           |
-
-> [!NOTE]  
-> The more the amount of exams/discussion the provider has, the longer it will take to scrape through the exams.
-
-### `-save-links` && `-output-save-links`
-
-This is a bool flag, so the default is that it's set to `false`, deactivated. If `-save-links` is false `-output-save-links` will do nothing.
-`-output-save-links` is a `string` which includes the output path for the saved links, default is `saved-links.txt`.
-
-### Grep String, `-s`
-
-The `-s` argument can take an exam ID (ex. 200-301) or a word, such as "devops". for example:
-
-```bash
-go run . -p google -s devops
-```
-
-would get all exams from the `google` provider containing the string `devops`.
-
-### Comments and output, `-c` && `-o`
-
-The `-c` argument is another bool flag, so it is defaultly set to false(as it creates a lot of noise in the `.md` file), but you can include it by adding the flag.
-`-o` is the output path, based on `os.create(path)`, in the current working directory.
-
-### Exams output, `-exams`
-
-This argument will display output defaulted to such as and exit immediately.
-
-```
-Exams for provider 'google'
-
-https://www.examtopics.com/exams/google/adwords-fundamentals/
-https://www.examtopics.com/exams/google/associate-android-developer/
-https://www.examtopics.com/exams/google/associate-cloud-engineer/
-https://www.examtopics.com/exams/google/associate-data-practitioner/
-https://www.examtopics.com/exams/google/associate-google-workspace-administrator/
-https://www.examtopics.com/exams/google/cloud-digital-leader/
-https://www.examtopics.com/exams/google/display-advertising/
-https://www.examtopics.com/exams/google/google-analytics/
-https://www.examtopics.com/exams/google/gsuite/
-https://www.examtopics.com/exams/google/individual-qualification/
-https://www.examtopics.com/exams/google/mobile-advertising/
-https://www.examtopics.com/exams/google/professional-chromeos-administrator/
-https://www.examtopics.com/exams/google/professional-cloud-architect/
-https://www.examtopics.com/exams/google/professional-cloud-database-engineer/
-https://www.examtopics.com/exams/google/professional-cloud-developer/
-https://www.examtopics.com/exams/google/professional-cloud-devops-engineer/
-https://www.examtopics.com/exams/google/professional-cloud-network-engineer/
-https://www.examtopics.com/exams/google/professional-cloud-security-engineer/
-https://www.examtopics.com/exams/google/professional-collaboration-engineer/
-https://www.examtopics.com/exams/google/professional-data-engineer/
-https://www.examtopics.com/exams/google/professional-google-workspace-administrator/
-https://www.examtopics.com/exams/google/professional-machine-learning-engineer/
-https://www.examtopics.com/exams/google/search-advertising/
-https://www.examtopics.com/exams/google/shopping-advertising/
-https://www.examtopics.com/exams/google/video-advertising/
-```
-
-### Token Input, `-t`
-
-When you add you `Github` PAT, it allows for more requests to the API, (up to 5000) which is needed when scraping bigger things.
-The cached data helps you access big dumps faster.
-
-### No Cache Arg, `-no-cache`
-
-When you add this argument, it tells the program to ignore the cached `Github` repoitories of updated exam info, however the scraper will take longer than the cache.
-Useful when wanting to scrape realtime data.
-
-### File Type, `-type`
-
-When you use the `-type` argument, it tells the program to convert the default filetype of `.md` files to the option of your choice.  
-Currently we have these types supported:  
-- `html` -> generates `examtopics_output.html`
-- `pdf` -> generates `examtopics_output.pdf`
-- `txt` -> generates `examtopics_output.txt`
-
-> [!NOTE]  
-> Files are kept in same/similar format as you would see in the `.md` file, for formatting changes, use other arguments.
+Output is always HTML and defaults to `provider_exam-code.html` (for example, `cisco_200-301.html`).
 
 ## [For outputted file examples, see the examples folder](examples/google_devops.md)
 
@@ -189,18 +37,18 @@ So, you have installed `go` on your system, and you're inside of the working dir
 Open your terminal and run:
 
 ```bash
-go run . -p cisco -s 200-301
+go run ./cmd/main.go
 ```
 
-Note that you can put the id as the string to look for, as the program is compatible this way also.
+Then choose `Cisco` from the provider list and `200-301` from the exam list when prompted.
 
 After waiting a few moments, you would see the output end with:
 
 ```bash
-Successfully saved output to {OUTPUT_LOCATION}.
+Successfully saved output: {OUTPUT_LOCATION}.
 ```
 
-If so, hooray, you have successfully saved all/most of the questions in a `.md` file!
+If so, hooray, you have successfully saved all/most of the questions in an `.html` file!
 The format would be such as (older, only scraping format):
 
 ```
@@ -219,7 +67,7 @@ Topic #: 1
 [All 200-301 Questions]
 
 Refer to the exhibit. An engineer configured NAT translations and has verified that the configuration is correct. Which IP address is the source IP after the NAT has taken place?
-Suggested Answer: D 🗳️
+Suggested Answer: D 
 
 A. 10.4.4.4
 
