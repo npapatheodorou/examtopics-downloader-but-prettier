@@ -7,8 +7,8 @@
   <a href="https://go.dev/">
     <img src="https://img.shields.io/badge/Built%20with-Go-blue?style=flat-square" alt="Built with Go">
   </a>
-  <a href="https://github.com/youknowwho/examtopics-downloader-but-prettier/releases/latest">
-    <img src="https://img.shields.io/github/v/release/youknowwho/examtopics-downloader-but-prettier?include_prereleases&label=Latest%20Release&style=flat-square" alt="Latest Release">
+  <a href="https://github.com/npapatheodorou/examtopics-downloader-but-prettier/releases/latest">
+    <img src="https://img.shields.io/github/v/release/npapatheodorou/examtopics-downloader-but-prettier?include_prereleases&label=Latest%20Release&style=flat-square" alt="Latest Release">
   </a>
 </p>
 
@@ -40,7 +40,7 @@
 
 ### Option 1: Use the Pre-built .exe (Recommended)
 
-1. Go to the [Releases](https://github.com/youknowwho/examtopics-downloader-but-prettier/releases) page
+1. Go to the [Releases](https://github.com/npapatheodorou/examtopics-downloader-but-prettier/releases) page
 2. Download the latest `examtopics-downloader-windows-amd64.exe`
 3. Double-click to run - no installation needed!
 
@@ -49,7 +49,7 @@
 If you have [Go installed](https://go.dev/dl/):
 
 ```bash
-git clone https://github.com/youknowwho/examtopics-downloader-but-prettier.git
+git clone https://github.com/npapatheodorou/examtopics-downloader-but-prettier.git
 cd examtopics-downloader-but-prettier
 go build -o examtopics-downloader.exe ./cmd/main.go
 ```
