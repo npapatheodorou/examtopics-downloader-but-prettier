@@ -5,6 +5,7 @@ import (
 	"html"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 	"sync"
 
@@ -176,7 +177,7 @@ func normalizeCommentText(raw string) string {
 	return strings.Join(cleaned, "\n")
 }
 
-func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concurrency int, onPageProcessed func()) []string {
+func fetchAllPageLinksConcurrently(providerName, selectedExam string, numPages, concurrency int, onPageProcessed func()) []string {
 	var wg sync.WaitGroup
 	sem := make(chan struct{}, concurrency)
 	results := make(chan []string, numPages)
@@ -194,7 +195,7 @@ func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concu
 			<-rateLimiter.C
 
 			url := fmt.Sprintf("https://www.examtopics.com/discussions/%s/%d", providerName, i)
-			results <- getLinksFromPage(url, grepStr)
+			results <- getLinksFromPage(providerName, url, selectedExam)
 			if onPageProcessed != nil {
 				onPageProcessed()
 			}
@@ -216,18 +217,21 @@ func fetchAllPageLinksConcurrently(providerName, grepStr string, numPages, concu
 }
 
 // Main concurrent page scraping logic
-func GetAllPages(providerName string, grepStr string) []models.QuestionData {
+func GetAllPages(providerName string, selectedExam string) []models.QuestionData {
 	baseURL := fmt.Sprintf("https://www.examtopics.com/discussions/%s/", providerName)
 	numPages := getMaxNumPages(baseURL)
 	startTime := utils.StartTime()
 	bar := pb.StartNew(numPages)
 
-	allLinks := fetchAllPageLinksConcurrently(providerName, grepStr, numPages, constants.MaxConcurrentRequests, func() {
+	allLinks := fetchAllPageLinksConcurrently(providerName, selectedExam, numPages, constants.MaxConcurrentRequests, func() {
 		bar.Increment()
 	})
 
 	unique := utils.DeduplicateLinks(allLinks)
 	sortedLinks := utils.SortLinksByQuestionNumber(unique)
+	if summary := buildSelectedExamVariantSummary(providerName, selectedExam, sortedLinks); summary != "" {
+		fmt.Printf("\n%s\n", summary)
+	}
 	bar.SetTotal(int64(numPages + len(sortedLinks)))
 
 	if len(sortedLinks) == 0 {
@@ -275,4 +279,49 @@ func GetAllPages(providerName string, grepStr string) []models.QuestionData {
 	fmt.Printf("Extraction complete in %s.\n", utils.TimeSince(startTime))
 
 	return finalData
+}
+
+func buildSelectedExamVariantSummary(providerName, selectedExam string, links []string) string {
+	selectedExam = strings.TrimSpace(strings.ToLower(selectedExam))
+	if selectedExam == "" {
+		return ""
+	}
+
+	selectedNormalized := normalizeExamSlug(providerName, selectedExam)
+	if selectedNormalized == "" {
+		return ""
+	}
+
+	variantCounts := map[string]int{}
+	for _, link := range links {
+		raw := extractExamSlugFromDiscussionURL(link)
+		if raw == "" {
+			continue
+		}
+		if normalizeExamSlug(providerName, raw) != selectedNormalized {
+			continue
+		}
+		variantCounts[raw]++
+	}
+
+	if len(variantCounts) == 0 {
+		return ""
+	}
+
+	var variants []string
+	for slug := range variantCounts {
+		variants = append(variants, slug)
+	}
+	sort.Strings(variants)
+
+	if len(variants) == 1 && variants[0] == selectedNormalized {
+		return ""
+	}
+
+	summary := make([]string, 0, len(variants))
+	for _, slug := range variants {
+		summary = append(summary, fmt.Sprintf("%s (%d)", slug, variantCounts[slug]))
+	}
+
+	return fmt.Sprintf("Including grouped variants for %s: %s", selectedNormalized, strings.Join(summary, ", "))
 }

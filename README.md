@@ -1,87 +1,185 @@
-# Exam Topics Downloader
+# ExamTopics Downloader (Enhanced Edition)
 
-This repo aims to make it possible for you to obtain all the exam questions from the examtopics website (which is paywalled).
+<p align="center">
+  <a href="https://github.com/thatonecodes/examtopics-downloader">
+    <img src="https://img.shields.io/badge/Forked%20from-thatonecodes-blue?style=flat-square" alt="Forked from thatonecodes/examtopics-downloader">
+  </a>
+  <a href="https://go.dev/">
+    <img src="https://img.shields.io/badge/Built%20with-Go-blue?style=flat-square" alt="Built with Go">
+  </a>
+  <a href="https://github.com/youknowwho/examtopics-downloader-but-prettier/releases/latest">
+    <img src="https://img.shields.io/github/v/release/youknowwho/examtopics-downloader-but-prettier?include_prereleases&label=Latest%20Release&style=flat-square" alt="Latest Release">
+  </a>
+</p>
 
-## Setting it Up
+> **This project is a fork of [thatonecodes/examtopics-downloader](https://github.com/thatonecodes/examtopics-downloader)**  
+> Special thanks to [@thatonecodes](https://github.com/thatonecodes) for creating the original tool that made this possible.
 
-### Running with Go
+---
 
-1. First, you must install [Golang >= 1.24](https://go.dev/doc/install) from the offical website.
-2. Then, run `git clone https://github.com/thatonecodes/examtopics-downloader` in your terminal to clone the repo.
-3. `cd` into the directory: `cd examtopics-downloader`
-4. You can now run: `go run ./cmd/main.go`
+## What is this?
 
-(there will be compiled binaries in the future)
+**ExamTopics Downloader (Enhanced Edition)** is a user-friendly command-line tool that lets you download exam questions from [ExamTopics](https://examtopics.com/) and save them in a clean, readable format. Whether you're preparing for AWS, Azure, Google Cloud, CompTIA, or dozens of other certifications, this tool makes it easy to access and study exam questions offline.
 
-## Interactive Flow
+---
 
-There are no required startup parameters.
-Optional:
-- `-debug` enables verbose debug/error logs during fetch and extraction.
+## Features
 
-When the app starts it will:
-1. scrape and display all available providers
-2. ask you to select a provider
-3. scrape and display all available exams for that provider
-4. ask you to select an exam
-5. run extraction with a single progress bar for the whole extraction workflow
+| Feature | Description |
+|---------|-------------|
+| **Download Exams** | Fetch questions from any exam available on ExamTopics |
+| **Clean HTML Output** | Beautiful, readable HTML format that's easy on the eyes |
+| **Interactive Selection** | Browse and select exams with an easy-to-use menu |
+| **Exam Simulation Mode** | Practice exams interactively with an HTML-based simulation |
+| **Ready-to-Use .exe** | No need to install Go - download the pre-built executable and run it |
+| **Cross-Platform** | Build from source for Windows, macOS, or Linux |
 
-Output is always HTML and defaults to `provider_exam-code.html` (for example, `cisco_200-301.html`).
+---
 
-## [For outputted file examples, see the examples folder](examples/google_devops.md)
+## Quick Start (Windows)
 
-## Demo
+### Option 1: Use the Pre-built .exe (Recommended)
 
-So, you have installed `go` on your system, and you're inside of the working directory. Let's say you would like the questions for the cisco exam 200-301.
+1. Go to the [Releases](https://github.com/youknowwho/examtopics-downloader-but-prettier/releases) page
+2. Download the latest `examtopics-downloader-windows-amd64.exe`
+3. Double-click to run - no installation needed!
 
-Open your terminal and run:
+### Option 2: Build from Source
+
+If you have [Go installed](https://go.dev/dl/):
 
 ```bash
-go run ./cmd/main.go
+git clone https://github.com/youknowwho/examtopics-downloader-but-prettier.git
+cd examtopics-downloader-but-prettier
+go build -o examtopics-downloader.exe ./cmd/main.go
 ```
 
-Then choose `Cisco` from the provider list and `200-301` from the exam list when prompted.
-
-After waiting a few moments, you would see the output end with:
+Or use the included build script:
 
 ```bash
-Successfully saved output: {OUTPUT_LOCATION}.
+build.bat
 ```
 
-If so, hooray, you have successfully saved all/most of the questions in an `.html` file!
-The format would be such as (older, only scraping format):
+---
+
+## How to Use
+
+### Running the Tool
+
+Simply double-click the `.exe` file (or run from terminal):
 
 ```
-----------------------------------------
-
-## Exam 200-301 topic 1 question 532 discussion
-
-Actual exam question from
-
-Cisco's
-200-301
-
-Question #: 532
-Topic #: 1
-
-[All 200-301 Questions]
-
-Refer to the exhibit. An engineer configured NAT translations and has verified that the configuration is correct. Which IP address is the source IP after the NAT has taken place?
-Suggested Answer: D 
-
-A. 10.4.4.4
-
-B. 10.4.4.5
-
-C. 172.23.103.10
-
-D. 172.23.104.4
-
-**Answer: D**
-
-**Timestamp: Jan. 5, 2021, 9:48 p.m.**
-
-[View on ExamTopics](https://www.examtopics.com/discussions/cisco/view/41599-exam-200-301-topic-1-question-532-discussion/)
-
-----------------------------------------
+examtopics-downloader-windows-amd64.exe
 ```
+
+### Step-by-Step
+
+1. **Select a Provider**  
+   Choose your certification vendor (e.g., AWS, Azure, CompTIA)
+
+2. **Select an Exam**  
+   Pick the specific exam or exam series you want to download
+
+3. **Wait for Download**  
+   The tool will fetch all questions and save them
+
+4. **Open the Output**  
+   Find the generated `.html` file in the same folder and open it in your browser
+
+### Output Files
+
+- **`provider_examname.html`** - The main exam output in HTML format
+- Open the HTML file in any browser to view, print, or study
+
+---
+
+## Sample Workflow
+
+```
+============================================================
+ ExamTopics Downloader - Interactive Exam Extractor
+============================================================
+
+[*] Loading providers from ExamTopics...
+[OK] Done. Found 45 provider(s) in 4s.
+
+--------------------------------------------------------
+ Available Exams
+--------------------------------------------------------
+ Showing 1 of 1
+ Filter: ""
+
+   1. aws-saa-co03 (SAA-C03 - AWS Solutions Architect)
+
+ Commands: [number] select | /text filter | / clear | /refresh refetch
+Select> 1
+[INFO] Starting extraction for aws / aws-saa-co03...
+[OK] Successfully saved output: aws_saa-co03.html
+```
+
+---
+
+## Improvements Over the Original
+
+This fork includes several enhancements over the original [examtopics-downloader](https://github.com/thatonecodes/examtopics-downloader):
+
+- **Fixed Missing Exams** - Added support for exams that were previously not accessible
+- **Resolved Minor Issues** - Bug fixes and stability improvements
+- **Better Usability** - Improved user experience for non-technical users
+- **Compiled .exe Release** - No need to install Go; download and run
+- **HTML Exam Simulation** - Practice exams in an interactive browser-based format
+- **Enhanced Filtering** - Search and filter exams with the `/text` command
+
+---
+
+## Technical Details
+
+### Requirements
+
+- **Windows**: No additional requirements (pre-built .exe)
+- **From Source**: Go 1.21+
+
+### Building
+
+```bash
+# Build for Windows (amd64)
+go build -o examtopics-downloader.exe ./cmd/main.go
+
+# Build for other platforms
+GOOS=linux GOARCH=amd64 go build -o examtopics-downloader ./cmd/main.go
+GOOS=darwin GOARCH=amd64 go build -o examtopics-downloader ./cmd/main.go
+```
+
+### Output Formats
+
+The tool generates clean, styled HTML that works in any browser. The HTML includes:
+- Question text with proper formatting
+- Multiple choice answers (A, B, C, D...)
+- Correct answer highlights
+- Explanation sections
+- Clean, modern styling
+
+---
+
+## Disclaimer
+
+This tool is for **educational purposes only**. ExamTopics content is copyrighted material. Please support ExamTopics by using their site directly if you can.
+
+---
+
+## License
+
+See [LICENSE](LICENSE) for details.
+
+---
+
+## Credits
+
+- **Original Author**: [@thatonecodes](https://github.com/thatonecodes) - Thank you for creating this amazing tool!
+- **This Fork**: Enhanced and maintained by the community
+
+---
+
+<p align="center">
+  <strong>Good luck with your certification studies!</strong>
+</p>

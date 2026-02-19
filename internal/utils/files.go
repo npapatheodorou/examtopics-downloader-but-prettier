@@ -3,6 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"examtopics-downloader/internal/models"
+	"examtopics-downloader/internal/templates"
 	"fmt"
 	htmlpkg "html"
 	"os"
@@ -40,6 +41,7 @@ var (
 	providerOnlyPattern   = regexp.MustCompile(`(?i)/discussions/([^/]+)/`)
 	titleExamPattern      = regexp.MustCompile(`(?i)\bexam\s+(.+?)\s+topic\b`)
 
+	codeWithPrefixPattern  = regexp.MustCompile(`(?i)\b[a-z0-9]{1,6}-\d{2,4}(?:-[a-z0-9]{1,4})*\b`)
 	examCodePattern        = regexp.MustCompile(`(?i)\b\d{2,4}(?:-\d{2,4})+\b`)
 	answerLetterPattern    = regexp.MustCompile(`(?i)\b([A-F])\b`)
 	answerLettersRunes     = regexp.MustCompile(`(?i)[A-F]`)
@@ -70,7 +72,11 @@ func writeFile(filename string, content any) {
 }
 
 func WriteData(dataList []models.QuestionData, outputPath string, commentBool bool) ([]string, error) {
-	htmlDoc, err := buildTemplateDocument(dataList, commentBool)
+	return WriteDataWithSelection(dataList, outputPath, commentBool, "", "")
+}
+
+func WriteDataWithSelection(dataList []models.QuestionData, outputPath string, commentBool bool, selectedProvider string, selectedExam string) ([]string, error) {
+	htmlDoc, err := buildTemplateDocument(dataList, commentBool, selectedProvider, selectedExam)
 	if err != nil {
 		return nil, err
 	}
@@ -83,13 +89,13 @@ func WriteData(dataList []models.QuestionData, outputPath string, commentBool bo
 	return []string{htmlOutput}, nil
 }
 
-func buildTemplateDocument(dataList []models.QuestionData, includeComments bool) ([]byte, error) {
+func buildTemplateDocument(dataList []models.QuestionData, includeComments bool, selectedProvider string, selectedExam string) ([]byte, error) {
 	templateShell, err := readTemplateShell()
 	if err != nil {
 		return nil, err
 	}
 
-	meta := deriveExamMeta(dataList)
+	meta := deriveExamMeta(dataList, selectedProvider, selectedExam)
 	withMeta := applyTemplateMeta(templateShell, meta)
 
 	cardsHTML := buildQuestionCards(dataList, includeComments)
@@ -129,19 +135,27 @@ func readTemplateShell() (string, error) {
 		}
 	}
 
+	embedded := strings.TrimSpace(templates.EmbeddedTemplate)
+	if embedded != "" {
+		return templates.EmbeddedTemplate, nil
+	}
+
 	return "", fmt.Errorf("could not locate template.html")
 }
 
-func deriveExamMeta(dataList []models.QuestionData) examMeta {
-	provider := ""
-	examSlug := ""
+func deriveExamMeta(dataList []models.QuestionData, selectedProvider string, selectedExam string) examMeta {
+	provider := strings.TrimSpace(strings.ToLower(selectedProvider))
+	examSlug := sanitizeExamSlug(selectedExam)
 
 	for _, item := range dataList {
-		if item.QuestionLink != "" {
+		if item.QuestionLink != "" && (provider == "" || examSlug == "") {
 			if matches := discussionLinkPattern.FindStringSubmatch(item.QuestionLink); len(matches) == 3 {
-				provider = strings.ToLower(strings.TrimSpace(matches[1]))
-				examSlug = strings.ToLower(strings.TrimSpace(matches[2]))
-				break
+				if provider == "" {
+					provider = strings.ToLower(strings.TrimSpace(matches[1]))
+				}
+				if examSlug == "" {
+					examSlug = strings.ToLower(strings.TrimSpace(matches[2]))
+				}
 			}
 			if provider == "" {
 				if matches := providerOnlyPattern.FindStringSubmatch(item.QuestionLink); len(matches) == 2 {
@@ -153,6 +167,9 @@ func deriveExamMeta(dataList []models.QuestionData) examMeta {
 			if matches := titleExamPattern.FindStringSubmatch(item.Title); len(matches) == 2 {
 				examSlug = sanitizeExamSlug(matches[1])
 			}
+		}
+		if provider != "" && examSlug != "" {
+			break
 		}
 	}
 
@@ -220,6 +237,10 @@ func deriveExamCode(examSlug string) string {
 	examSlug = strings.TrimSpace(strings.ToLower(examSlug))
 	if examSlug == "" {
 		return ""
+	}
+
+	if code := codeWithPrefixPattern.FindString(examSlug); code != "" {
+		return strings.ToUpper(code)
 	}
 
 	if code := examCodePattern.FindString(examSlug); code != "" {

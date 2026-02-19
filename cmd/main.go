@@ -4,107 +4,267 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"log"
 	"math"
 	"os"
 	"regexp"
-	"sort"
 	"strconv"
 	"strings"
+	"time"
 
 	"examtopics-downloader/internal/fetch"
 	"examtopics-downloader/internal/utils"
 )
 
+const (
+	ansiReset  = "\x1b[0m"
+	ansiBold   = "\x1b[1m"
+	ansiCyan   = "\x1b[36m"
+	ansiGreen  = "\x1b[32m"
+	ansiYellow = "\x1b[33m"
+	ansiRed    = "\x1b[31m"
+	ansiGray   = "\x1b[90m"
+)
+
+var useANSI = detectANSI()
+
 func main() {
+	defer func() {
+		if r := recover(); r != nil {
+			printErrorf("Unexpected error: %v\n", r)
+			pauseBeforeExitOnError()
+			os.Exit(1)
+		}
+	}()
+
+	if err := run(); err != nil {
+		printErrorf("Error: %v\n", err)
+		pauseBeforeExitOnError()
+		os.Exit(1)
+	}
+}
+
+func run() error {
 	debug := flag.Bool("debug", false, "Enable debug logs")
 	flag.Parse()
 	fetch.SetDebug(*debug)
 
+	printBanner()
+
 	reader := bufio.NewReader(os.Stdin)
 
-	providers := fetch.GetAllProviders()
-	if len(providers) == 0 {
-		log.Fatal("no providers found")
-	}
-
-	providerIdx, err := promptSelection(reader, "Available Providers", providers, formatProviderName)
+	selectedProvider, err := promptSelectionWithRefresh(
+		reader,
+		"Available Providers",
+		getProvidersWithStatus,
+		formatProviderName,
+	)
 	if err != nil {
-		log.Fatalf("failed reading provider selection: %v", err)
-	}
-	selectedProvider := providers[providerIdx]
-
-	examLinks := fetch.GetProviderExams(selectedProvider)
-	examSlugs := extractExamSlugs(selectedProvider, examLinks)
-	if len(examSlugs) == 0 {
-		log.Fatalf("no exams found for provider %q", selectedProvider)
+		return fmt.Errorf("failed reading provider selection: %w", err)
 	}
 
-	examIdx, err := promptSelection(reader, fmt.Sprintf("Available Exams for %s", formatProviderName(selectedProvider)), examSlugs, func(s string) string {
-		return s
-	})
+	selectedExam, err := promptSelectionWithRefresh(
+		reader,
+		fmt.Sprintf("Available Exams for %s", formatProviderName(selectedProvider)),
+		func() []string { return getProviderExamSlugsWithStatus(selectedProvider) },
+		func(s string) string {
+			if s == "all-discussions" {
+				return "all-discussions (fallback)"
+			}
+			return s
+		},
+	)
 	if err != nil {
-		log.Fatalf("failed reading exam selection: %v", err)
+		return fmt.Errorf("failed reading exam selection: %w", err)
 	}
-	selectedExam := examSlugs[examIdx]
+	extractionFilter := selectedExam
+	if selectedExam == "all-discussions" {
+		extractionFilter = ""
+	}
 
-	fmt.Printf("\nStarting extraction for %s / %s...\n", formatProviderName(selectedProvider), selectedExam)
-	links := fetch.GetAllPages(selectedProvider, selectedExam)
+	printInfof("Starting extraction for %s / %s...\n", formatProviderName(selectedProvider), selectedExam)
+	links := fetch.GetAllPages(selectedProvider, extractionFilter)
 	if len(links) == 0 {
-		log.Fatal("no matching questions were extracted")
+		return fmt.Errorf("no matching questions were extracted")
 	}
 
 	outputPath := defaultOutputPath(selectedProvider, selectedExam)
-	savedFiles, err := utils.WriteData(links, outputPath, true)
+	headerExam := selectedExam
+	if selectedExam == "all-discussions" {
+		headerExam = ""
+	}
+	savedFiles, err := utils.WriteDataWithSelection(links, outputPath, true, selectedProvider, headerExam)
 	if err != nil {
-		log.Fatalf("failed writing output: %v", err)
+		return fmt.Errorf("failed writing output: %w", err)
 	}
 
-	fmt.Printf("Successfully saved output: %s\n", strings.Join(savedFiles, ", "))
+	printSuccessf("Successfully saved output: %s\n", strings.Join(savedFiles, ", "))
+	return nil
 }
 
-func promptSelection(reader *bufio.Reader, title string, options []string, formatter func(string) string) (int, error) {
-	all := make([]selectionOption, 0, len(options))
-	for i, opt := range options {
-		all = append(all, selectionOption{
-			RawIndex: i,
-			Label:    formatter(opt),
-		})
+func pauseBeforeExitOnError() {
+	stat, err := os.Stdin.Stat()
+	if err != nil {
+		return
+	}
+	if (stat.Mode() & os.ModeCharDevice) == 0 {
+		return
+	}
+
+	fmt.Print(style("Press Enter to close...", ansiGray))
+	_, _ = bufio.NewReader(os.Stdin).ReadString('\n')
+}
+
+func getProvidersWithStatus() []string {
+	printInfof("Loading providers from ExamTopics...\n")
+	fmt.Println(style("This may take a moment while data is fetched from exams and discussions.", ansiGray))
+
+	done := make(chan struct{})
+	start := time.Now()
+
+	go func() {
+		ticker := time.NewTicker(15 * time.Second)
+		defer ticker.Stop()
+
+		status := []string{
+			"Still working: loading provider categories...",
+			"Still working: checking discussions-only providers...",
+			"Still working: organizing provider list...",
+		}
+		step := 0
+
+		for {
+			select {
+			case <-done:
+				return
+			case <-ticker.C:
+				elapsed := time.Since(start).Round(time.Second)
+				printInfof("%s Elapsed: %s\n", status[step], elapsed)
+				if step < len(status)-1 {
+					step++
+				}
+			}
+		}
+	}()
+
+	providers := fetch.GetAllProviders()
+	close(done)
+
+	elapsed := time.Since(start).Round(time.Second)
+	printSuccessf("Done. Found %d provider(s) in %s.\n", len(providers), elapsed)
+	return providers
+}
+
+func getProviderExamSlugsWithStatus(provider string) []string {
+	providerLabel := formatProviderName(provider)
+	printSection(fmt.Sprintf("Exam Discovery: %s", providerLabel))
+	fmt.Println(style("Scanning available exams (including discussion-derived variants).", ansiGray))
+
+	done := make(chan struct{})
+	start := time.Now()
+
+	go func() {
+		ticker := time.NewTicker(20 * time.Second)
+		defer ticker.Stop()
+
+		status := []string{
+			"Still working: checking available exam names...",
+			"Still working: this provider has many discussion pages to review.",
+			"Still working: organizing the exam list for you.",
+		}
+		step := 0
+
+		for {
+			select {
+			case <-done:
+				return
+			case <-ticker.C:
+				elapsed := time.Since(start).Round(time.Second)
+				printInfof("%s Elapsed: %s\n", status[step], elapsed)
+				if step < len(status)-1 {
+					step++
+				}
+			}
+		}
+	}()
+
+	examSlugs := fetch.GetProviderExamSlugs(provider)
+	close(done)
+
+	elapsed := time.Since(start).Round(time.Second)
+	printSuccessf("Done. Found %d exam option(s) for %s in %s.\n", len(examSlugs), providerLabel, elapsed)
+
+	return examSlugs
+}
+
+func promptSelectionWithRefresh(
+	reader *bufio.Reader,
+	title string,
+	loadOptions func() []string,
+	formatter func(string) string,
+) (string, error) {
+	options := loadOptions()
+	if len(options) == 0 {
+		return "", fmt.Errorf("no options found for %s", title)
 	}
 
 	filter := ""
 	for {
-		filtered := filterOptions(all, filter)
-		if len(filtered) == 0 {
-			fmt.Printf("\n%s\n", title)
-			fmt.Printf("No results for filter %q. Enter / to clear filter.\n", filter)
-		} else {
-			fmt.Printf("\n%s (%d shown of %d)\n", title, len(filtered), len(all))
-			printOptionsInColumns(filtered)
+		all := make([]selectionOption, 0, len(options))
+		for i, opt := range options {
+			all = append(all, selectionOption{
+				RawIndex: i,
+				Label:    formatter(opt),
+			})
 		}
 
-		fmt.Printf("Type number to select, /text to filter, / to clear: ")
+		filtered := filterOptions(all, filter)
+		printMenuHeader(title, len(filtered), len(all), filter)
+		if len(filtered) == 0 {
+			printWarnf("No results for filter %q. Use / to clear.\n", filter)
+		} else {
+			printOptionsInColumns(filtered)
+		}
+		printMenuHelp()
+
+		fmt.Print(style("Select> ", ansiBold+ansiCyan))
 		raw, err := reader.ReadString('\n')
 		if err != nil {
-			return 0, err
+			return "", err
 		}
 
 		raw = strings.TrimSpace(raw)
 		if raw == "" {
 			continue
 		}
+
 		if strings.HasPrefix(raw, "/") {
-			filter = strings.TrimSpace(strings.TrimPrefix(raw, "/"))
+			command := strings.TrimSpace(strings.TrimPrefix(raw, "/"))
+			switch strings.ToLower(command) {
+			case "":
+				filter = ""
+			case "refresh":
+				printInfof("Refreshing list...\n")
+				refreshed := loadOptions()
+				if len(refreshed) == 0 {
+					printWarnf("Refresh returned no results. Keeping current list.\n")
+				} else {
+					options = refreshed
+					filter = ""
+					printSuccessf("List refreshed. %d option(s) available.\n", len(options))
+				}
+			default:
+				filter = command
+			}
 			continue
 		}
 
 		choice, err := strconv.Atoi(raw)
 		if err != nil || choice < 1 || choice > len(filtered) {
-			fmt.Println("Invalid selection. Please enter a valid number.")
+			printWarnf("Invalid selection. Please enter a valid number.\n")
 			continue
 		}
 
-		return filtered[choice-1].RawIndex, nil
+		return options[filtered[choice-1].RawIndex], nil
 	}
 }
 
@@ -136,7 +296,7 @@ func printOptionsInColumns(options []selectionOption) {
 	lines := make([]string, 0, len(options))
 	maxWidth := 0
 	for i, opt := range options {
-		line := fmt.Sprintf("%3d) %s", i+1, strings.TrimSpace(opt.Label))
+		line := fmt.Sprintf("%3d. %s", i+1, strings.TrimSpace(opt.Label))
 		lines = append(lines, line)
 		if len(line) > maxWidth {
 			maxWidth = len(line)
@@ -167,37 +327,78 @@ func printOptionsInColumns(options []selectionOption) {
 			if c > 0 {
 				row.WriteString("  ")
 			}
-			row.WriteString(fmt.Sprintf("%-*s", colWidth, lines[idx]))
+			row.WriteString(style(fmt.Sprintf("%-*s", colWidth, lines[idx]), ansiCyan))
 		}
 		fmt.Println(strings.TrimRight(row.String(), " "))
 	}
 }
 
-func extractExamSlugs(provider string, examLinks []string) []string {
-	pattern := regexp.MustCompile(fmt.Sprintf(`(?i)^/exams/%s/([^/]+)/?$`, regexp.QuoteMeta(strings.ToLower(strings.TrimSpace(provider)))))
-	seen := map[string]struct{}{}
-	out := make([]string, 0, len(examLinks))
+func printBanner() {
+	fmt.Println(style(strings.Repeat("=", 64), ansiGray))
+	fmt.Println(style(" ExamTopics Downloader - Interactive Exam Extractor", ansiBold+ansiCyan))
+	fmt.Println(style(strings.Repeat("=", 64), ansiGray))
+	fmt.Println()
+}
 
-	for _, link := range examLinks {
-		matches := pattern.FindStringSubmatch(strings.ToLower(strings.TrimSpace(link)))
-		if len(matches) != 2 {
-			continue
-		}
+func printSection(title string) {
+	fmt.Println()
+	fmt.Println(style(strings.Repeat("-", 64), ansiGray))
+	fmt.Println(style(" "+title, ansiBold+ansiCyan))
+	fmt.Println(style(strings.Repeat("-", 64), ansiGray))
+}
 
-		examSlug := strings.TrimSpace(matches[1])
-		if examSlug == "" {
-			continue
-		}
-		if _, exists := seen[examSlug]; exists {
-			continue
-		}
-
-		seen[examSlug] = struct{}{}
-		out = append(out, examSlug)
+func printMenuHeader(title string, shown int, total int, filter string) {
+	printSection(title)
+	fmt.Println(style(fmt.Sprintf(" Showing %d of %d", shown, total), ansiGray))
+	if strings.TrimSpace(filter) != "" {
+		fmt.Println(style(fmt.Sprintf(" Filter: %q", filter), ansiYellow))
 	}
+	fmt.Println()
+}
 
-	sort.Strings(out)
-	return out
+func printMenuHelp() {
+	fmt.Println(style(" Commands: [number] select | /text filter | / clear | /refresh refetch", ansiGray))
+}
+
+func printInfof(format string, args ...any) {
+	fmt.Printf(style("[INFO] ", ansiCyan)+format, args...)
+}
+
+func printSuccessf(format string, args ...any) {
+	fmt.Printf(style("[OK] ", ansiGreen)+format, args...)
+}
+
+func printWarnf(format string, args ...any) {
+	fmt.Printf(style("[WARN] ", ansiYellow)+format, args...)
+}
+
+func printErrorf(format string, args ...any) {
+	fmt.Printf(style("[ERROR] ", ansiRed)+format, args...)
+}
+
+func style(text string, code string) string {
+	if !useANSI || text == "" {
+		return text
+	}
+	return code + text + ansiReset
+}
+
+func detectANSI() bool {
+	stat, err := os.Stdout.Stat()
+	if err != nil {
+		return false
+	}
+	if (stat.Mode() & os.ModeCharDevice) == 0 {
+		return false
+	}
+	if strings.EqualFold(strings.TrimSpace(os.Getenv("NO_COLOR")), "1") {
+		return false
+	}
+	term := strings.TrimSpace(strings.ToLower(os.Getenv("TERM")))
+	if term == "dumb" {
+		return false
+	}
+	return true
 }
 
 func defaultOutputPath(provider, examSlug string) string {
